@@ -5,21 +5,46 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
+    "prettier": "prettier --write .",
+    "prepare": "husky install"
   },
   "dependencies": {
     "axios": "^0.27.2",
     "element-plus": "^2.2.2",
     "pinia": "^2.0.14",
+    "sun-web-utils": "^0.2.3",
     "vue": "^3.2.25",
     "vue-router": "^4.0.13"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
     "@vitejs/plugin-vue": "^2.3.1",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^9.0.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.2",
+    "prettier": "^2.6.2",
     "typescript": "^4.5.4",
     "unplugin-auto-import": "^0.8.5",
     "unplugin-vue-components": "^0.19.6",
     "vite": "^2.9.7",
     "vue-tsc": "^0.34.7"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,vue,js,jsx}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
