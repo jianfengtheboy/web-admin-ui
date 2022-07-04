@@ -7,6 +7,9 @@ import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 
+const path = require('path')
+const resolve = (dir: string) => path.resolve(process.cwd(), dir)
+
 export default defineConfig({
   plugins: [
     vue(),
