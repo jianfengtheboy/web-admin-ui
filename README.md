@@ -1,23 +1,64 @@
-# Vue 3 + TypeScript + Vite
+# vue-admin-ui
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3
-`<script setup>` SFCs, check out the
-[script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## vue element项目模版
 
-## Recommended IDE Setup
+## Build Setup
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+```bash
+# install dependencies
+yarn OR npm install
 
-## Type Support For `.vue` Imports in TS
+# serve with hot reload at localhost:8080
+yarn dev OR npm run dev
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type
-by default. In most cases this is fine if you don't really care about component prop types outside of templates.
-However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual
-`h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+# build for production with minification
+yarn build OR npm run build
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for
-   `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take
-   Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+# build for production and view the bundle analyzer report
+npm run build --report
+```
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+### 一、系统简介
+
+#### 1.1、概述
+
+vue3 管理系统前端项目模版
+
+#### 1.2 服务维护者
+
+- name: jianfengtheboy email: jianfengtheboy@163.com
+
+### 二、系统介绍
+
+#### 2.1、主要技术
+
+- 1、vite@^2.9.7
+- 2、vue@^3.2.25
+- 3、vue-router@^4.0.13
+- 4、pinia@^2.0.14
+- 5、typescript@^4.5.4
+- 6、axios@^0.27.2
+- 7、element-plus@^2.2.2
+- 8、sass@^1.49.9
+
+#### 2.2、项目结构
+
+##### 文件说明
+
+| 文件名称       | 说明                                               |
+| -------------- | -------------------------------------------------- |
+| src            | 项目配置项目开发的所有内容页面                     |
+| src/assets     | 配置项目所需的公共的静态资源页面                   |
+| src/components | 配置项目业务相关的公共组件                         |
+| src/config     | 配置项目在开发环境和生产环境项目下的一些不同的配置 |
+| src/icons      | 配置项目的 svg 图标                                |
+| src/layout     | 全局布局页面                                       |
+| src/request    | 封装 axios 方法                                    |
+| src/router     | 项目路由配置                                       |
+| src/stores     | 配置 pinia 做全局状态管理                           |
+| src/styles     | 全局公用 css 文件                                  |
+| src/utils      | 全局共用方法                                       |
+| src/views/     | 配置业务的所有页面                                 |
+| src/App        | 入口页面                                           |
+| src/main.ts    | 打包入口文件                                       |
+| vite.config.ts | vite 自定义配置和开发代理配置等                      |
