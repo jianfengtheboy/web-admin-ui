@@ -18,45 +18,45 @@ export default defineConfig({
     }),
     Components({
       dts: true,
-			resolvers: [
-				IconsResolver({
-					prefix: 'icon',
-					customCollections: ['custom']
-				})
-			]
+      resolvers: [
+        IconsResolver({
+          prefix: 'icon',
+          customCollections: ['custom']
+        })
+      ]
     }),
     Icons({
-			compiler: 'vue3',
-			customCollections: {
-				custom: FileSystemIconLoader(resolve('src/assets/icons'))
-			}
-		})
+      compiler: 'vue3',
+      customCollections: {
+        custom: FileSystemIconLoader(resolve('src/assets/icons'))
+      }
+    })
   ],
   resolve: {
-		alias: {
-			'@': resolve('src')
-		},
-		dedupe: ['vue']
-	},
-	css: {
-		preprocessorOptions: {
-			less: {
-				javascriptEnabled: true,
-				modifyVars: {},
-				additionalData: ``
-			}
-		}
-	},
+    alias: {
+      '@': resolve('src')
+    },
+    dedupe: ['vue']
+  },
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+        modifyVars: {},
+        additionalData: ``
+      }
+    }
+  },
   server: {
-		open: false,
-		host: '0.0.0.0',
-		proxy: {
-			'/api': {
-				target: 'xxxxx',
-				changeOrigin: true,
-				ws: true,
-				rewrite: (path) => path.replace(/^\/api/, '')
-			}
-		}
-	}
+    open: false,
+    host: '0.0.0.0',
+    proxy: {
+      '/api': {
+        target: 'xxxxx',
+        changeOrigin: true,
+        ws: true,
+        rewrite: path => path.replace(/^\/api/, '')
+      }
+    }
+  }
 })
