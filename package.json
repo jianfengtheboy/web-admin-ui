@@ -12,9 +12,10 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "element-plus": "^2.2.2",
+    "dayjs": "^1.11.5",
+    "element-plus": "^2.2.13",
+    "lodash": "^4.17.21",
     "pinia": "^2.0.14",
-    "sun-web-utils": "^0.2.3",
     "vue": "^3.2.25",
     "vue-router": "^4.0.13"
   },
@@ -30,11 +31,14 @@
     "husky": "^8.0.1",
     "lint-staged": "^12.4.2",
     "prettier": "^2.6.2",
+    "sass": "^1.54.4",
+    "sass-loader": "^13.0.2",
     "typescript": "^4.5.4",
     "unplugin-auto-import": "^0.8.5",
     "unplugin-icons": "^0.14.7",
     "unplugin-vue-components": "^0.19.6",
     "vite": "^2.9.7",
+    "vite-plugin-compression": "^0.5.1",
     "vue-tsc": "^0.34.7"
   },
   "husky": {

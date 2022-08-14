@@ -1,11 +1,15 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+// element-plus
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+// icon
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
+// gzip
+import ViteCompression from 'vite-plugin-compression'
 
 const path = require('path')
 const resolve = (dir: string) => path.resolve(process.cwd(), dir)
@@ -30,7 +34,8 @@ export default defineConfig({
       customCollections: {
         custom: FileSystemIconLoader(resolve('src/assets/icons'))
       }
-    })
+    }),
+    ViteCompression()
   ],
   resolve: {
     alias: {
