@@ -25,3 +25,4 @@ dist-ssr
 yarn.lock
 
 components.d.ts
+auto-import.d.ts
