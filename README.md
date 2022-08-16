@@ -32,14 +32,14 @@ vue3 管理系统前端项目模版
 
 #### 2.1、主要技术
 
-- 1、vite@^2.9.7
-- 2、vue@^3.2.25
-- 3、vue-router@^4.0.13
-- 4、pinia@^2.0.14
-- 5、typescript@^4.5.4
+- 1、vite@^3.0.7
+- 2、vue@^3.2.37
+- 3、vue-router@^4.1.3
+- 4、pinia@^2.0.18
+- 5、typescript@^4.6.4
 - 6、axios@^0.27.2
-- 7、element-plus@^2.2.2
-- 8、sass@^1.49.9
+- 7、element-plus@^2.2.13
+- 8、sass@^1.54.4
 
 #### 2.2、项目结构
 
@@ -51,11 +51,12 @@ vue3 管理系统前端项目模版
 | src/assets     | 配置项目所需的公共的静态资源页面                   |
 | src/components | 配置项目业务相关的公共组件                         |
 | src/config     | 配置项目在开发环境和生产环境项目下的一些不同的配置 |
-| src/icons      | 配置项目的 svg 图标                                |
-| src/layout     | 全局布局页面                                       |
+| src/hooks      | 配置全局hooks |
+| src/layouts    | 全局布局页面                                       |
+| src/model      | 配置全局model |
 | src/request    | 封装 axios 方法                                    |
 | src/router     | 项目路由配置                                       |
-| src/stores     | 配置 pinia 做全局状态管理                          |
+| src/store      | 配置 pinia 做全局状态管理                          |
 | src/styles     | 全局公用 css 文件                                  |
 | src/utils      | 全局共用方法                                       |
 | src/views/     | 配置业务的所有页面                                 |
