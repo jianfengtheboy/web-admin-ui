@@ -37,13 +37,13 @@ module.exports = {
     //关闭组件命名规则
     'vue/multi-word-component-names': 'off',
     'no-var': 'error',
-    'prettier/prettier': 'error',
+    'prettier/prettier': 'off',
     // 禁止出现console
-    'no-console': 'warn',
+    'no-console': 'off',
     // 禁用debugger
     'no-debugger': 'warn',
     // 禁止出现重复的 case 标签
-    'no-duplicate-case': 'warn',
+    'no-duplicate-case': 'off',
     // 禁止出现空语句块
     'no-empty': 'warn',
     // 禁止不必要的括号
@@ -91,7 +91,7 @@ module.exports = {
     // 强制在代码块中使用一致的大括号风格
     'brace-style': 'warn',
     // 强制使用骆驼拼写法命名约定
-    camelcase: 'warn',
+    camelcase: 'off',
     // 强制使用一致的缩进
     indent: 'off',
     // 强制在 JSX 属性中一致地使用双引号或单引号
