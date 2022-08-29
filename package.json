@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "lint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
     "prettier": "prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "changelog": "conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0  -n ./changelog-option.js"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -27,6 +28,9 @@
     "@typescript-eslint/parser": "^5.35.1",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vitejs/plugin-vue-jsx": "^2.0.0",
+    "compare-func": "^2.0.0",
+    "conventional-changelog-cli": "^2.2.2",
+    "conventional-changelog-custom-config": "^0.3.1",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
