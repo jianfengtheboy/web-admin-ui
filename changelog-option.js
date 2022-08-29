@@ -36,6 +36,8 @@ module.exports = {
         commit.scope = ''
       }
 
+      commit.subject = `${commit.type}: ` + commit.subject
+
       if (typeof commit.hash === 'string') {
         commit.hash = commit.hash.substring(0, 7)
       }
