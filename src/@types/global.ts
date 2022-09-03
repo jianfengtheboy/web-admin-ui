@@ -1,5 +1,6 @@
+export {}
 declare global {
-  interface window {
+  interface Window {
     $_: typeof import('lodash')
   }
 
@@ -8,5 +9,3 @@ declare global {
   // 操作类型
   type Operation = 'add' | 'edit' | 'detail' | 'delete'
 }
-
-export {}

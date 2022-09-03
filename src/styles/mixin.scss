@@ -1,0 +1,32 @@
+// 多行显示省略号
+@mixin no-wrap-line($line) {
+  display: -webkit-box;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  autoprefixer: on;
+}
+
+// 圆角
+@mixin borderRadius($radius: 5px) {
+  border-radius: $radius;
+}
+
+// transform
+@mixin transform($transform) {
+  transform: $transform;
+}
+
+// box-sizing
+@mixin box-border-sizing() {
+  box-sizing: border-box;
+}
+
+ // 圆形
+@mixin round($size) {
+	width: $size;
+	height: $size;
+	border-radius: 50%;
+}

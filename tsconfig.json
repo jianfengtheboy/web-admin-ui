@@ -14,7 +14,7 @@
     "skipLibCheck": true,
     "noImplicitAny": false,
     "strictNullChecks": true,
-    "types": ["element-plus/global", "unplugin-icons/types/vue"],
+    "types": ["element-plus/global", "unplugin-icons/types/vue", "pinia-plugin-persist"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
