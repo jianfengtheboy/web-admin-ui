@@ -1,7 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './element.scss';
+
+html {
+	padding: 0;
+	margin: 0;
+}
+
 body {
 	font-family: 'Microsoft YaHei', '微软雅黑', 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	padding: 0;
 	letter-spacing: 0.4px;
 	font-size: 14px;
 	background-color: #f1f8ff;
@@ -17,6 +29,12 @@ body {
 	--header-height: 68px;
 	--side-bar-width: 240px;
 	--side-bar-collapse-width: 56px;
+	--el-color-primary: #0096ff;
+	--el-color-warning: #fca700;
+	--el-color-danger: #ff1d52;
+	--el-color-success: #00b246;
+	--el-color-info: #909196;
+	--el-menu-text-color: #666;
 }
 
 :root .el-menu {
@@ -37,4 +55,19 @@ body {
 ::-webkit-scrollbar-track {
 	background-color: transparent;
 	border-radius: 4px;
+}
+
+// 主页面
+.page-content {
+	min-height: 100%;
+	padding: 20px;
+	border-radius: 8px;
+	background-color: #fff;
+}
+
+// 二级详情页面
+.view-content {
+	padding: 20px;
+	border-radius: 10px;
+	background: #fff;
 }
