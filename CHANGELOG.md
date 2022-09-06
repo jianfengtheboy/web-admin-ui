@@ -1,4 +1,14 @@
-# 1.0.0 (2022-09-04)
+# 1.0.0 (2022-09-06)
+
+
+### 2022-09-06
+
+* **全局:** ✨ feat: 修改主题样式，添加store持久化存储工具 ([10ccd4a](https://github.com/jianfengtheboy/vue-admin-ui/commit/10ccd4a))
+
+
+### 2022-09-04
+
+* **自定义主题样式:** ✨ feat: 完善相关配置 ([6adda3c](https://github.com/jianfengtheboy/vue-admin-ui/commit/6adda3c))
 
 
 ### 2022-09-03
