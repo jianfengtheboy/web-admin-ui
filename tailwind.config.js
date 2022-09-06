@@ -19,10 +19,10 @@ module.exports = {
         indigo: colors.indigo,
         purple: colors.violet,
         pink: colors.pink,
-        primary: '#0096ff',
-        warning: '#FCA700',
-        danger: '#FF1D52',
-        success: '#00B246',
+        primary: '#0969da',
+        warning: '#F59E0B',
+        danger: '#DC2626',
+        success: '#059669',
         info: '#909196'
       }
     }

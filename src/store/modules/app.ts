@@ -14,9 +14,11 @@ export const useAppStore = defineStore('app', {
       userName: ''
     }
   }),
-  getters: {},
-  actions: {},
   persist: {
-    enabled: true
-  }
+    key: 'APP_STORE',
+    storage: localStorage,
+    paths: ['token', 'userInfo']
+  },
+  getters: {},
+  actions: {}
 })

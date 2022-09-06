@@ -36,7 +36,7 @@ vue3 管理系统前端项目模版
 - 2、vue@^3.2.37
 - 3、vue-router@^4.0.13
 - 4、pinia@^2.0.21
-- 5、pinia-plugin-persist@^1.0.0
+- 5、pinia-plugin-persistedstate@^2.1.1
 - 6、typescript@^4.6.4
 - 7、axios@^0.27.2
 - 8、element-plus@^2.2.15
