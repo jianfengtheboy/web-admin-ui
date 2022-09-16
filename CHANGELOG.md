@@ -3,7 +3,9 @@
 
 ### 2022-09-06
 
+* **全局:** ✨ feat: 更新背景颜色 ([fa15703](https://github.com/jianfengtheboy/vue-admin-ui/commit/fa15703))
 * **全局:** ✨ feat: 修改主题样式，添加store持久化存储工具 ([10ccd4a](https://github.com/jianfengtheboy/vue-admin-ui/commit/10ccd4a))
+* **update:** ✨ feat: 更新changelog ([869e97c](https://github.com/jianfengtheboy/vue-admin-ui/commit/869e97c))
 
 
 ### 2022-09-04
