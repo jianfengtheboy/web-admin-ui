@@ -4,6 +4,7 @@
 ### 2022-09-17
 
 * **全局:** 🧱 chore: 初始化项目 ([5d321b5](https://github.com/jianfengtheboy/vue-admin-ui/commit/5d321b5))
+* **全局:** 🧱 chore: 添加commitlint配置、自动生成changelog配置 ([861cf25](https://github.com/jianfengtheboy/vue-admin-ui/commit/861cf25))
 
 
 ### 2022-09-06

@@ -2,6 +2,16 @@ import { resolve } from 'path'
 import { defineConfig, defineViteConfig } from 'electron-vite'
 import vue from '@vitejs/plugin-vue'
 import { loadEnv } from 'vite'
+// jsx支持
+import vueJsx from '@vitejs/plugin-vue-jsx'
+// icon
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import { FileSystemIconLoader } from 'unplugin-icons/loaders'
+// element-plus
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineConfig({
   main: {
@@ -28,7 +38,32 @@ export default defineConfig({
     const config = {
       // env 变量前缀
       envPrefix: 'ELECTRON_VITE_',
-      plugins: [vue()],
+      plugins: [
+        vue(),
+        // jsx支持
+        vueJsx(),
+        // icon
+        Icons({
+          compiler: 'vue3',
+          customCollections: {
+            custom: FileSystemIconLoader(resolve('src/renderer/src/assets/icons'))
+          }
+        }),
+        AutoImport({
+          imports: ['vue'],
+          resolvers: [ElementPlusResolver()]
+        }),
+        Components({
+          dts: true,
+          resolvers: [
+            ElementPlusResolver(),
+            IconsResolver({
+              prefix: 'icon',
+              customCollections: ['custom']
+            })
+          ]
+        })
+      ],
       resolve: {
         alias: {
           '@renderer': resolve('src/renderer/src')
@@ -40,7 +75,7 @@ export default defineConfig({
           less: {
             javascriptEnabled: true,
             modifyVars: {},
-            additionalData: ``
+            additionalData: `@import "src/renderer/src/styles/mixin.less";@import "src/renderer/src/styles/theme.less";`
           }
         }
       },

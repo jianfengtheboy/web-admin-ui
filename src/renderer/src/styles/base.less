@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './element.less';
+
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Microsoft YaHei', '微软雅黑', 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  letter-spacing: 0.4px;
+  font-size: 14px;
+  background-color: #f6f6f6;
+  color: #323233;
+}
+
+#app {
+  height: 100vh;
+}
+
+:root #app {
+  --header-height: 68px;
+  --side-bar-width: 240px;
+  --side-bar-collapse-width: 56px;
+  --el-color-primary: #0969da;
+  --el-color-warning: #F59E0B;
+  --el-color-danger: #DC2626;
+  --el-color-success: #059669;
+  --el-color-info: #909196;
+  --el-menu-text-color: #666;
+  --el-color-primary-light-3: rgba(9, 105, 218, 0.8);
+  --el-color-success-light-3: rgba(5, 150, 105, 0.8);
+  --el-color-warning-light-3: rgba(245, 158, 11, 0.8);
+  --el-color-danger-light-3: rgba(220, 38, 38, 0.8);
+  --el-color-info-light-3: rgba(144, 145, 150, 0.8);
+}
+
+:root .el-menu {
+  --el-menu-bg-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.03);
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 4px;
+}
+
+// 主页面
+.page-content {
+  min-height: 100%;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+// 二级详情页面
+.view-content {
+  padding: 20px;
+  border-radius: 10px;
+  background: #fff;
+}
