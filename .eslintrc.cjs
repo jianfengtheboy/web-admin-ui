@@ -31,6 +31,7 @@ module.exports = {
     // 关闭组件命名规则
     'vue/multi-word-component-names': 'off',
     'no-var': 'error',
+    'prettier/prettier': 'off',
     // 禁止出现console
     'no-console': 'off',
     // 禁用debugger

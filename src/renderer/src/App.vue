@@ -4,8 +4,7 @@ import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 </script>
 
 <template>
-  <el-config-provider :locale="zhCn">
-  </el-config-provider>
+  <el-config-provider :locale="zhCn"></el-config-provider>
 </template>
 
 <style lang="less"></style>
