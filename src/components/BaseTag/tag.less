@@ -1,0 +1,161 @@
+.base-tag {
+	display: inline-flex;
+	padding: 0 8px;
+	height: 20px;
+	font-size: 12px;
+	line-height: 1;
+	border-radius: 3px;
+	justify-content: center;
+	align-items: center;
+	white-space: nowrap;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+.base-tag-close-btn {
+	position: relative;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	margin-left: 6px;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: block;
+		width: 16px;
+		height: 16px;
+		box-sizing: border-box;
+		background-color: transparent;
+		border-radius: var(--border-radius-circle);
+		transition: background-color 0.1s cubic-bezier(0, 0, 1, 1);
+	}
+
+	.close-icon {
+		width: 12px;
+		height: 12px;
+		z-index: 9;
+	}
+}
+
+@status: primary, success, warning, danger, gray;
+
+.base-tag-dark {
+	color: var(--color-bg-1);
+
+	each(@status, {
+    &.base-tag-status-@{value} {
+      border: 1px solid rgb(var(~'--@{value}-6'));
+      background-color: rgb(var(~'--@{value}-6'));
+
+      .base-tag-close-btn {
+        &:hover {
+          color: rgb(var(~'--@{value}-6'));
+
+          &::before {
+            background-color: rgb(var(~'--@{value}-2'));
+          }
+        }
+      }
+    }
+  });
+}
+
+// 循环light样式
+.base-tag-light {
+	color: var(--color-bg-1);
+
+	each(@status, {
+    &.base-tag-status-@{value} {
+      color: rgb(var(~'--@{value}-6'));
+      background-color: rgb(var(~'--@{value}-1'));
+
+      .base-tag-close-btn {
+        &:hover {
+          color: var(--color-bg-1);
+
+          &::before {
+            background-color: rgb(var(~'--@{value}-6'));
+          }
+        }
+      }
+    }
+  });
+}
+
+// 循环outline样式
+.base-tag-outline {
+	background: transparent;
+
+	each(@status, {
+    &.base-tag-status-@{value} {
+      color: rgb(var(~'--@{value}-6'));
+      border: 1px solid rgb(var(~'--@{value}-6'));
+
+      .base-tag-close-btn {
+        &:hover {
+          color: var(--color-bg-1);
+
+          &::before {
+            background-color: rgb(var(~'--@{value}-6'));
+          }
+        }
+      }
+    }
+  });
+}
+
+// 循环light-outline样式
+.base-tag-light-outline {
+	each(@status, {
+    &.base-tag-status-@{value} {
+      color: rgb(var(~'--@{value}-6'));
+      border: 1px solid rgb(var(~'--@{value}-2'));
+      background-color: rgb(var(~'--@{value}-1'));
+
+      .base-tag-close-btn {
+        &:hover {
+          color: var(--color-bg-1);
+
+          &::before {
+            background-color: rgb(var(~'--@{value}-6'));
+          }
+        }
+      }
+    }
+  });
+}
+
+// 循环mini样式
+.base-tag-size-mini {
+	height: 22px;
+	padding: 0 4px;
+
+	.base-tag-close-btn {
+		.close-icon {
+			width: 10px;
+			height: 10px;
+		}
+
+		&::before {
+			width: 13px;
+			height: 13px;
+		}
+	}
+}
+
+// 循环small样式
+.base-tag-size-small {
+	height: 24px;
+}
+
+// 循环large样式
+.base-tag-size-large {
+	height: 28px;
+	padding: 0 10px;
+	font-size: 14px;
+}

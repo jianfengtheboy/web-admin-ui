@@ -1,0 +1,242 @@
+// @import '@arco-design/web-vue/dist/arco.css';
+@import '@arco-themes/vue-gi-demo/index.less';
+
+/**
+ * a-description
+**/
+.arco-descriptions-layout-inline-horizontal {
+	&.arco-descriptions-size-medium {
+		.arco-descriptions-item {
+			padding-bottom: 8px;
+		}
+	}
+}
+
+.arco-descriptions-layout-inline-horizontal .arco-descriptions-item-label-inline {
+	margin-right: 10px;
+}
+
+/**
+ * a-input-number
+**/
+.arco-input-number.arco-input-number-mode-button {
+	.arco-input-prepend {
+		.arco-btn {
+			border-right: 0;
+		}
+	}
+	.arco-input-append {
+		.arco-btn {
+			border-left: 0;
+		}
+	}
+}
+
+/**
+ * a-input
+**/
+.arco-input-prepend {
+	border-right: none;
+}
+.arco-input-append {
+	border-left: none;
+}
+
+/**
+ * a-menu
+**/
+.arco-trigger-menu-item.arco-trigger-menu-selected,
+.arco-trigger-menu-pop-header.arco-trigger-menu-selected {
+	color: rgb(var(--primary-6));
+}
+
+.arco-menu-icon-suffix {
+	transition: all 0.2s;
+}
+
+/**
+ * a-message
+**/
+.fade-message-enter-from {
+	opacity: 0;
+	transform: translate3d(0, -100%, 0);
+}
+
+.fade-message-enter-to {
+	opacity: 1;
+	transform: translate3d(0, 0, 0);
+}
+
+.fade-message-enter-active,
+.fade-message-appear-active {
+	transition: opacity @transition-duration-3, transform @transition-duration-4;
+}
+
+.fade-message-leave-from {
+	opacity: 1;
+	transform: translate3d(0, 0, 0);
+}
+
+.fade-message-leave-to {
+	opacity: 0;
+	transform: translate3d(0, -100%, 0);
+}
+
+.fade-message-leave-active {
+	position: absolute;
+}
+
+/**
+ * a-modal
+**/
+.arco-modal-title .arco-icon-exclamation-circle-fill {
+	font-size: 24px;
+}
+
+.arco-modal-title-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.arco-modal:not(.arco-modal-simple) {
+	.arco-modal-body {
+		padding: 16px 20px;
+	}
+	.arco-modal-footer {
+		padding: 10px 20px;
+	}
+}
+
+.arco-modal-simple {
+	width: 90%;
+	max-width: 400px;
+	padding: 14px 16px;
+	box-sizing: border-box;
+	.arco-modal-header {
+		.arco-modal-title {
+			font-size: 18px;
+		}
+	}
+	.arco-modal-body {
+		font-size: 16px;
+	}
+	.arco-modal-footer {
+		margin-top: 15px;
+		text-align: right;
+	}
+}
+
+/**
+ * a-pagination
+**/
+.arco-pagination-item {
+	padding: 0 6px;
+	border: 1px solid var(--color-border-3);
+	background-color: var(--color-bg-2);
+	border-radius: var(--border-radius-medium);
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	transition: none;
+	box-sizing: border-box;
+	&:hover {
+		color: rgb(var(--primary-6));
+		border: 1px solid rgb(var(--primary-6));
+		background-color: rgba(var(--primary-6), 0.1);
+	}
+	&:active {
+		color: #fff;
+		background-color: rgb(var(--primary-6));
+		border: 1px solid rgb(var(--primary-6));
+	}
+}
+
+.arco-pagination-item-active {
+	color: #fff;
+	background-color: rgb(var(--primary-6));
+	border: 1px solid rgb(var(--primary-6));
+	&:hover {
+		color: #fff;
+		background-color: rgb(var(--primary-6));
+		border: 1px solid rgb(var(--primary-6));
+	}
+}
+
+.arco-pagination .arco-pagination-item-previous.arco-pagination-item-disabled,
+.arco-pagination .arco-pagination-item-next.arco-pagination-item-disabled {
+	border-color: var(--color-border-2);
+	&:hover {
+		border-color: var(--color-border-2);
+	}
+}
+
+/**
+ * a-picker
+**/
+.arco-picker {
+	width: 100%;
+}
+
+/**
+ * a-scrollbar
+**/
+.arco-scrollbar-track-direction-vertical {
+	width: 8px;
+}
+.arco-scrollbar-thumb-direction-vertical .arco-scrollbar-thumb-bar {
+	width: 6px;
+	margin: 0 1px;
+}
+
+.arco-scrollbar-track-direction-horizontal {
+	height: 8px;
+}
+.arco-scrollbar-thumb-direction-horizontal .arco-scrollbar-thumb-bar {
+	height: 6px;
+	margin: 1px 0;
+}
+
+.arco-scrollbar-thumb-bar {
+	background-color: var(--color-neutral-3);
+}
+
+/**
+ * a-table
+**/
+.arco-table-th-title {
+	font-size: 13px;
+	font-weight: 600;
+}
+
+/**
+ * a-tree
+**/
+.arco-tree-show-line .arco-tree-node-is-leaf:not(.arco-tree-node-is-tail) .arco-tree-node-indent::after,
+.arco-tree-show-line .arco-tree-node-indent-block::before {
+	transform: translateX(0);
+	border-color: var(--color-border-3);
+	flex-shrink: 0;
+}
+
+.arco-tree-node-minus-icon,
+.arco-tree-node-plus-icon {
+	border: 1px solid var(--color-border-3);
+	box-sizing: border-box;
+}
+
+.arco-tree-node-switcher-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+// 禁止文本复制
+.arco-link,
+.arco-menu-title,
+.arco-menu-item-inner,
+.arco-tabs-tab-title,
+.arco-breadcrumb-item,
+.arco-checkbox-label {
+	user-select: none;
+}
