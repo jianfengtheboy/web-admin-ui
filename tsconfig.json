@@ -1,32 +1,48 @@
 {
 	"compilerOptions": {
+		// 指定 ECMAScript 目标版本: 'ES3' (default), 'ES5', 'ES6'/'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'
 		"target": "ES2020",
 		"module": "ES2020",
 		"useDefineForClassFields": true,
+		// 指定要包含在编译中的库文件
 		"lib": ["ES2020", "DOM", "DOM.Iterable"],
+		// 是否跳过声明文件的类型检查，这可以在编译期间以牺牲类型系统准确性为代价来节省时间，默认：false
 		"skipLibCheck": true,
+		// 选择模块解析策略： 'node' (Node.js) or 'classic' (TypeScript pre-1.6)
 		"moduleResolution": "Node",
 		"allowImportingTsExtensions": true,
+		// 是否解析 JSON 模块
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
+		// 指定 jsx 代码的生成: 'preserve', 'react-native', or 'react'
 		"jsx": "preserve",
+		// 当使用经典的JSX运行时编译JSX元素时，更改.js文件中调用的函数，默认：React.createElement
 		"jsxFactory": "h",
+		// 指定 JSX 片段工厂函数在指定了 jsxFactory 编译器选项的情况下针对 react JSX 发出时使用 指定使用模块: 'commonjs', 'amd', 'system', 'umd' or 'es2015'
 		"jsxFragmentFactory": "Fragment",
 		"strict": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
+		// 是否生成相应的Map映射的文件，默认：false
 		"sourceMap": true,
+		// 是否通过为所有导入模块创建命名空间对象，允许CommonJS和ES模块之间的互操作性，开启改选项时，也自动开启allowSyntheticDefaultImports选项，默认：false
 		"esModuleInterop": true,
+		// 允许编译 javascript 文件
 		"allowJs": true,
+		// 报告 javascript 文件中的错误
+		"checkJs": true,
 		"noImplicitAny": false,
 		"strictNullChecks": true,
+		// 用于解析非相对模块名称的基目录
 		"baseUrl": ".",
+		// 模块名到基于 baseUrl 的路径映射的列表
 		"paths": {
 			"@/*": ["src/*"]
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/types/*.d.ts"],
+	"exclude": ["node_modules", "dist", "**/*.js"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

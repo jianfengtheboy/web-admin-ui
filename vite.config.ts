@@ -1,8 +1,8 @@
+import path from 'node:path'
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import path from 'path'
-import { fileURLToPath, URL } from 'url'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 // vue 自动引入
 import AutoImport from 'unplugin-auto-import/vite'

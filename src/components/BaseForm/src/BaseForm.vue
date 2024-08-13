@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Options, Columns, ColumnsItemHide, ColumnsItem } from './type'
+import type { Columns, ColumnsItem, ColumnsItemDisabled, ColumnsItemHide, Options } from './type'
 import type * as A from '@arco-design/web-vue'
 
 interface IProps {
@@ -29,6 +29,14 @@ const isHide = (hide?: ColumnsItemHide<boolean | object>) => {
 	if (typeof hide === 'boolean') return hide
 	if (typeof hide === 'function') {
 		return hide(props.modelValue)
+	}
+}
+
+const isDisabled = (disabled?: ColumnsItemDisabled<boolean | object>) => {
+	if (disabled === undefined) return false
+	if (typeof disabled === 'boolean') return disabled
+	if (typeof disabled === 'function') {
+		return disabled(props.modelValue)
 	}
 }
 
@@ -88,14 +96,20 @@ watch(cloneForm as any, (newVal, oldVal) => {
 					v-bind="item.col || item.span ? item.col : options.col"
 					v-show="index <= (options.fold?.index || 0) || (index >= (options.fold?.index || 0) && !collapsed)"
 				>
-					<a-form-item v-bind="item.item" :label="item.label" :field="item.field" :rules="item.rules">
-						<slot :name="item.field">
+					<a-form-item
+						v-bind="item.item"
+						:label="item.label"
+						:field="item.field"
+						:rules="item.rules"
+						:disabled="isDisabled(item.disabled)"
+					>
+						<slot :name="item.field" v-bind="{ disabled: isDisabled(item.disabled) }">
 							<!-- 输入框 -->
 							<template v-if="item.type === 'input'">
 								<a-input
 									:allow-clear="true"
 									:placeholder="item.placeholder || `请输入${item.label}`"
-									:max-length="20"
+									:max-length="item.maxLength || 20"
 									v-bind="(item.props as A.InputInstance['$props'])"
 									:model-value="modelValue[item.field as keyof typeof modelValue]"
 									@update:model-value="valueChange($event, item.field)"
@@ -115,7 +129,7 @@ watch(cloneForm as any, (newVal, oldVal) => {
 								<a-textarea
 									:allow-clear="true"
 									:placeholder="item.placeholder || `请输入${item.label}`"
-									:max-length="200"
+									:max-length="item.maxLength || 200"
 									:show-word-limit="true"
 									v-bind="(item.props as A.TextareaInstance['$props'])"
 									:model-value="modelValue[item.field as keyof typeof modelValue]"
@@ -183,12 +197,60 @@ watch(cloneForm as any, (newVal, oldVal) => {
 									@update:model-value="valueChange($event, item.field)"
 								/>
 							</template>
+							<!-- 年选择器 -->
+							<template v-if="item.type === 'year-picker'">
+								<a-year-picker
+									v-bind="(item.props as A.YearPickerInstance['$props'])"
+									:model-value="modelValue[item.field as keyof typeof modelValue]"
+									@update:model-value="valueChange($event, item.field)"
+								/>
+							</template>
+							<!-- 月选择器 -->
+							<template v-if="item.type === 'month-picker'">
+								<a-month-picker
+									v-bind="(item.props as A.MonthPickerInstance['$props'])"
+									:model-value="modelValue[item.field as keyof typeof modelValue]"
+									@update:model-value="valueChange($event, item.field)"
+								/>
+							</template>
+
+							<template v-if="item.type === 'quarter-picker'">
+								<a-quarter-picker
+									v-bind="(item.props as A.QuarterPickerInstance['$props'])"
+									:model-value="modelValue[item.field as keyof typeof modelValue]"
+									@update:model-value="valueChange($event, item.field)"
+								/>
+							</template>
+							<!-- 周选择器 -->
+							<template v-if="item.type === 'week-picker'">
+								<a-week-picker
+									v-bind="(item.props as A.WeekPickerInstance['$props'])"
+									:model-value="modelValue[item.field as keyof typeof modelValue]"
+									@update:model-value="valueChange($event, item.field)"
+								/>
+							</template>
+
+							<template v-if="item.type === 'range-picker'">
+								<a-range-picker
+									v-bind="(item.props as A.RangePickerInstance['$props'])"
+									:model-value="modelValue[item.field as keyof typeof modelValue]"
+									@update:model-value="valueChange($event, item.field)"
+								/>
+							</template>
 							<!-- 时间选择器 -->
 							<template v-if="item.type === 'time-picker'">
 								<a-time-picker
 									:allow-clear="true"
 									:placeholder="item.placeholder || `请选择时间`"
 									v-bind="(item.props as A.TimePickerInstance['$props'])"
+									:model-value="modelValue[item.field as keyof typeof modelValue]"
+									@update:model-value="valueChange($event, item.field)"
+								/>
+							</template>
+							<!-- 颜色选择器 -->
+							<template v-if="item.type === 'color-picker'">
+								<a-color-picker
+									v-bind="(item.props as A.ColorPickerInstance['$props'])"
 									:model-value="modelValue[item.field as keyof typeof modelValue]"
 									@update:model-value="valueChange($event, item.field)"
 								/>
@@ -246,5 +308,3 @@ watch(cloneForm as any, (newVal, oldVal) => {
 		</a-row>
 	</a-form>
 </template>
-
-<style lang="less" scoped></style>

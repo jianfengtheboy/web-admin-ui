@@ -2,6 +2,7 @@
 	"name": "arco-app-ui",
 	"private": true,
 	"version": "1.0.0",
+	"description": "基于 Vue3、Vite、TypeScript、Arco Design Vue、Pinia、VueUse 等的中后台模版",
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build --mode development",

@@ -7,7 +7,13 @@ export type FormType =
 	| 'checkbox-group'
 	| 'textarea'
 	| 'date-picker'
+	| 'year-picker'
+	| 'quarter-picker'
+	| 'week-picker'
+	| 'range-picker'
+	| 'month-picker'
 	| 'time-picker'
+	| 'color-picker'
 	| 'input-number'
 	| 'rate'
 	| 'switch'
@@ -20,7 +26,13 @@ export type ColumnsItemPropsKey =
 	| keyof A.SelectInstance['$props']
 	| keyof A.TextareaInstance['$props']
 	| keyof A.DatePickerInstance['$props']
+	| keyof A.YearPickerInstance['$props']
+	| keyof A.MonthPickerInstance['$props']
+	| keyof A.QuarterPickerInstance['$props']
+	| keyof A.WeekPickerInstance['$props']
+	| keyof A.RangePickerInstance['$props']
 	| keyof A.TimePickerInstance['$props']
+	| keyof A.ColorPickerInstance['$props']
 	| keyof A.RadioGroupInstance['$props']
 	| keyof A.CheckboxGroupInstance['$props']
 	| keyof A.InputNumberInstance['$props']
@@ -30,7 +42,8 @@ export type ColumnsItemPropsKey =
 	| keyof A.CascaderInstance['$props']
 	| keyof A.TreeSelectInstance['$props']
 
-export type ColumnsItemHide<F = any> = boolean | ((form: F) => boolean)
+export type ColumnsItemHide<F> = boolean | ((form: F) => boolean)
+export type ColumnsItemDisabled<F> = boolean | ((form: F) => boolean)
 export type ColumnsItemRequest<F = any> = (form: F) => Promise<any>
 export type ColumnsItemFormat<T = any> = (
 	res: T
@@ -50,11 +63,13 @@ export type ColumnsItemOptionsOrData =
 
 export interface ColumnsItem<F = any> {
 	// 类型
-	type: FormType
+	type?: FormType
 	// 标签
-	label: A.FormItemInstance['label']
+	label?: A.FormItemInstance['label']
 	// placeholder
 	placeholder?: string
+	// 长度限制
+	maxLength?: number
 	// 字段(必须唯一)
 	field: A.FormItemInstance['field']
 	// 栅格占位格数
@@ -89,6 +104,8 @@ export interface ColumnsItem<F = any> {
 	data?: A.TreeSelectInstance['$props']['data']
 	// 是否隐藏
 	hide?: ColumnsItemHide<F>
+	// 是否禁用
+	disabled?: ColumnsItemDisabled<F>
 	// 接口请求api
 	request?: ColumnsItemRequest<F>
 	// 结果集格式化
