@@ -1,7 +1,7 @@
 import http from '@/request/index'
 
 // 获取验证码
-export const getCaptcha = () => http.get('/captchaImage')
+export const getCaptcha = () => http.get('/captcha')
 
 // 登录
 export const login = data => http.post('/login', data)

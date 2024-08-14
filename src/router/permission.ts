@@ -1,8 +1,12 @@
 import router from '@/router'
 import { Message } from '@arco-design/web-vue'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import { useAppStore, useRouteStore, useNoticeStore } from '@/store'
 import { getToken } from '@/utils/auth'
 import { isHttp } from '@/utils/validate'
+
+NProgress.configure({ showSpinner: false })
 
 // 免登录白名单
 const whiteList = ['/login', '/register']
@@ -17,11 +21,13 @@ router.beforeEach(async (to, _from, next) => {
 	const appStore = useAppStore()
 	const noticeStore = useNoticeStore()
 	const routeStore = useRouteStore()
+	NProgress.start()
 
 	// 判断是否登录
 	if (getToken()) {
 		if (to.path === '/login') {
 			// 如果已经登录，并准备进入 Login 页面，则重定向到主页
+			NProgress.done()
 			next()
 		} else {
 			await noticeStore.fetchNotice()
@@ -35,15 +41,18 @@ router.beforeEach(async (to, _from, next) => {
 						}
 					})
 					hasRouteFlag = true
+					NProgress.done()
 					// 设置 replace: true, 因此导航将不会留下历史记录
 					next({ ...to, replace: true })
 				} catch (error: any) {
 					// 过程中发生任何错误，都直接重置 Token，并重定向到登录页面
 					appStore.resetToken()
 					Message.error(error.message || '路由守卫过程发生错误')
+					NProgress.done()
 					next(`/login?redirect=${to.path}`)
 				}
 			} else {
+				NProgress.done()
 				next()
 			}
 		}
@@ -51,9 +60,11 @@ router.beforeEach(async (to, _from, next) => {
 		// 如果没有 Token
 		if (whiteList.indexOf(to.path) !== -1) {
 			// 如果在免登录的白名单中，则直接进入
+			NProgress.done()
 			next()
 		} else {
 			// 其他没有访问权限的页面将被重定向到登录页面
+			NProgress.done()
 			next('/login')
 		}
 	}

@@ -38,11 +38,11 @@ vue3 管理系统项目模版
 
 #### 2.1、主要技术
 
-- 1、vite@^4.4.5
-- 2、vue@^3.3.4
+- 1、vite@^4.5.0
+- 2、vue@^3.3.7
 - 3、vue-router@^4.0.13
 - 4、pinia@^2.1.7
-- 5、typescript@^5.0.2
+- 5、typescript@^5.2.2
 - 6、axios@^1.6.0
 - 7、arco-design/web-vue@^2.55.0
 - 8、arco-design/color@^0.4.0
@@ -67,7 +67,7 @@ vue3 管理系统项目模版
 - 27、compare-func@^2.0.0
 - 28、conventional-changelog-cli@^2.2.2
 - 29、conventional-changelog-custom-config@^0.3.1
-- 30、husky@^8.0.0
+- 30、husky@^8.0.3
 - 31、less@^4.2.0
 - 32、tailwindcss@3.1.4
 - 33、typescript@^5.0.2

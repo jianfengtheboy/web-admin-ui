@@ -197,15 +197,7 @@ watch(cloneForm as any, (newVal, oldVal) => {
 									@update:model-value="valueChange($event, item.field)"
 								/>
 							</template>
-							<!-- 年选择器 -->
-							<template v-if="item.type === 'year-picker'">
-								<a-year-picker
-									v-bind="(item.props as A.YearPickerInstance['$props'])"
-									:model-value="modelValue[item.field as keyof typeof modelValue]"
-									@update:model-value="valueChange($event, item.field)"
-								/>
-							</template>
-							<!-- 月选择器 -->
+							<!-- 月份选择器 -->
 							<template v-if="item.type === 'month-picker'">
 								<a-month-picker
 									v-bind="(item.props as A.MonthPickerInstance['$props'])"
@@ -213,7 +205,15 @@ watch(cloneForm as any, (newVal, oldVal) => {
 									@update:model-value="valueChange($event, item.field)"
 								/>
 							</template>
-
+							<!-- 年份选择器 -->
+							<template v-if="item.type === 'year-picker'">
+								<a-year-picker
+									v-bind="(item.props as A.YearPickerInstance['$props'])"
+									:model-value="modelValue[item.field as keyof typeof modelValue]"
+									@update:model-value="valueChange($event, item.field)"
+								/>
+							</template>
+							<!-- 季度选择器 -->
 							<template v-if="item.type === 'quarter-picker'">
 								<a-quarter-picker
 									v-bind="(item.props as A.QuarterPickerInstance['$props'])"
@@ -229,7 +229,7 @@ watch(cloneForm as any, (newVal, oldVal) => {
 									@update:model-value="valueChange($event, item.field)"
 								/>
 							</template>
-
+							<!-- 范围选择器 -->
 							<template v-if="item.type === 'range-picker'">
 								<a-range-picker
 									v-bind="(item.props as A.RangePickerInstance['$props'])"

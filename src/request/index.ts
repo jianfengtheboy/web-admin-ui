@@ -1,12 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { Message } from '@arco-design/web-vue'
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
 import { AppStoreName } from '@/config/domain'
 import router from '@/router'
 import { useAppStore } from '@/store'
-
-NProgress.configure({ showSpinner: false })
 
 class Http {
 	private baseConfig: AxiosRequestConfig = {
@@ -44,7 +40,6 @@ class Http {
 	private setReqInterceptors = () => {
 		this.instance.interceptors.request.use(
 			(config: any) => {
-				NProgress.start()
 				config.cancelToken = new axios.CancelToken(function executor() {})
 				config.headers = {
 					...config.headers
@@ -66,26 +61,21 @@ class Http {
 				const appStore = useAppStore()
 				switch (code) {
 					case 200:
-						NProgress.done()
 						return Promise.resolve(response.data)
 					case 401:
-						NProgress.done()
 						Message.error(message || '无权限')
 						appStore.resetToken()
 						router.replace('/login')
 						return Promise.reject(data)
 					case 403:
-						NProgress.done()
 						Message.warning(message)
 						return Promise.reject(data)
 					default:
-						NProgress.done()
 						if (message) Message.error(message || '响应失败')
 						return Promise.reject(data)
 				}
 			},
 			error => {
-				NProgress.done()
 				Message.clear()
 				const requestData = window.$_.get(error, 'response.data')
 				if (requestData instanceof Blob) {

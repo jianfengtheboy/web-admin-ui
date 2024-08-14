@@ -31,9 +31,9 @@ const captchaImage = ref('')
 const loadCaptcha = async () => {
 	try {
 		const response = await window.$apis.common.getCaptcha()
-		const { img, uuid } = response
+		const { image, uuid } = response.data
 		formData.uuid = uuid
-		captchaImage.value = `data:image/gif;base64,${img}` || img
+		captchaImage.value = image || `data:image/png;base64,${image}`
 	} catch (error) {}
 }
 
