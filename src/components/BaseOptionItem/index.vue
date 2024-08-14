@@ -6,14 +6,16 @@ interface IProps {
 	active?: boolean
 }
 
-withDefaults(defineProps<IProps>(), {
+const props = withDefaults(defineProps<IProps>(), {
 	icon: '',
 	label: '',
 	more: false,
 	active: false
 })
 
-const emit = defineEmits(['click'])
+const emit = defineEmits<{
+	(e: 'click'): void
+}>()
 
 const handleClick = () => {
 	emit('click')
@@ -23,20 +25,20 @@ const handleClick = () => {
 <template>
 	<li
 		class="base-option-item cursor-pointer relative flex items-center select-none"
-		:class="{ more: more, active: active }"
+		:class="{ more: props.more, active: props.active }"
 		@click="handleClick"
 	>
 		<section class="flex items-center">
 			<span class="icon-wrapper flex items-center">
 				<slot name="icon">
-					<component :is="icon" :size="16" :stroke-width="2"></component>
+					<BaseIcon :name="props.icon" :size="16" />
 				</slot>
 			</span>
 			<slot>
-				<span>{{ label }}</span>
+				<span>{{ props.label }}</span>
 			</slot>
 		</section>
-		<IconRight v-if="more" />
+		<IconRight v-if="props.more" />
 	</li>
 </template>
 

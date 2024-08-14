@@ -5,7 +5,6 @@ import { useAppStore } from '@/store'
  * @desc v-hasPerm 操作权限处理
  * @desc 使用 v-hasPerm="['home:btn:add']"
  */
-
 function checkPermission(el: HTMLElement, binding: DirectiveBinding) {
 	const { value } = binding
 	const all_permission = '*:*:*'
