@@ -1,4 +1,6 @@
 // base hooks
+import useBreakpoint from './base/useBreakpoint'
+import useBreakpointIndex from './base/useBreakpointIndex'
 import useDevice from './base/useDevice'
 import useForm from './base/useForm'
 import useLoading from './base/useLoading'
@@ -10,4 +12,15 @@ import useTable from './base/useTable'
 import useDept from './business/useDept'
 import useRole from './business/useRole'
 
-export { useDevice, useForm, useLoading, usePagination, useRequest, useTable, useDept, useRole }
+export {
+	useBreakpoint,
+	useBreakpointIndex,
+	useDevice,
+	useForm,
+	useLoading,
+	usePagination,
+	useRequest,
+	useTable,
+	useDept,
+	useRole
+}

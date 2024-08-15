@@ -1,4 +1,4 @@
-import type { TableInstance } from '@arco-design/web-vue'
+import type { TableData, TableInstance } from '@arco-design/web-vue'
 import { Modal, Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 
@@ -10,20 +10,22 @@ interface Options<T> {
 }
 
 type PaginationParams = { page: number; size: number }
-type Api<T> = (params: PaginationParams) => Promise<ApiRes<ApiListData<T[]>>>
+type Api<T> = (params: PaginationParams) => Promise<ApiRes<ApiListData<T[]>>> | Promise<ApiRes<T[]>>
 
-export default function <T>(api: Api<T>, options?: Options<T>) {
+export default function useTable<T>(api: Api<T>, options?: Options<T>) {
 	const { formatResult, onSuccess, immediate, rowKey } = options || {}
 	const { pagination, setTotal } = usePagination(() => getTableData())
 	const loading = ref(false)
-	const tableData = ref<any[]>([])
+	const tableData = ref<T[]>([])
 
 	const getTableData = async () => {
 		try {
 			loading.value = true
 			const response = await api({ page: pagination.current, size: pagination.pageSize })
-			tableData.value = formatResult ? formatResult(response.data.rows) : response.data.rows
-			setTotal(response.data.total)
+			const data = !Array.isArray(response.data) ? response.data.rows : response.data
+			tableData.value = formatResult ? formatResult(data) : data
+			const total = !Array.isArray(response.data) ? response.data.total : data.length
+			setTotal(total)
 			onSuccess && onSuccess()
 		} catch (error) {
 			console.log(error)
@@ -50,9 +52,9 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
 
 	// 全选
 	const selectAll: TableInstance['onSelectAll'] = checked => {
-		const key = rowKey ?? ('id' as keyof T)
-		const arr = tableData.value.filter(i => !(i['disabled' as keyof T] ?? false))
-		selectedKeys.value = checked ? arr.map(i => i[key] as string | number) : []
+		const key = rowKey ?? 'id'
+		const arr = (tableData.value as TableData[]).filter(i => !(i?.disabled ?? false))
+		selectedKeys.value = checked ? arr.map(i => i[key as string]) : []
 	}
 
 	// 删除
@@ -60,7 +62,7 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
 		deleteApi: () => Promise<ApiRes<T>>,
 		options?: { title?: string; content?: string; successTip?: string; showModal?: boolean }
 	): Promise<boolean | undefined> => {
-		const onDetele = async () => {
+		const onDelete = async () => {
 			try {
 				const response = await deleteApi()
 				if (response.success) {
@@ -76,14 +78,14 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
 		// 是否显示对话框
 		const flag = options?.showModal ?? true
 		if (!flag) {
-			return onDetele()
+			return onDelete()
 		}
 		Modal.warning({
 			title: options?.title || '提示',
 			content: options?.content || '是否确认删除？',
 			hideCancel: false,
 			maskClosable: false,
-			onBeforeOk: onDetele
+			onBeforeOk: onDelete
 		})
 	}
 

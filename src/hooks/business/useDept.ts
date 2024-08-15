@@ -1,6 +1,7 @@
 import { mapTree } from 'xe-utils'
 import type { IDeptItem } from '@/model/dept'
 
+// 部门模块
 export default function useDept(options?: { onSuccess?: () => void }) {
 	const loading = ref(false)
 	const deptList = ref<IDeptItem[]>([])

@@ -1,4 +1,4 @@
-export default function <F extends {}>(initValue: F) {
+export default function useForm<F extends object>(initValue: F) {
 	const getInitValue = () => window.$_.cloneDeep(initValue)
 
 	const form = reactive(getInitValue())
