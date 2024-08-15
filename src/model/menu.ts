@@ -16,7 +16,7 @@ export interface IMenuItem {
 	roles: string[]
 	showInTabs: boolean
 	sort: number
-	status: 0 | 1
+	status: Status
 	svgIcon: string
 	title: string
 	type: 1 | 2
@@ -35,7 +35,7 @@ export interface IMenuForm {
 	svgIcon: string
 	title: string
 	sort: number
-	status: 1 | 0
+	status: Status
 	path: string
 	component: string
 	keepAlive: boolean

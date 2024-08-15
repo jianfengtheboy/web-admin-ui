@@ -6,7 +6,7 @@ export interface IRoleItem {
 	name: string
 	code: string
 	sort: number
-	status: 0 | 1
+	status: Status
 	type: number
 	description: string
 }

@@ -5,7 +5,7 @@ export interface IDictItem {
 	name: string
 	code: string
 	sort: number
-	status: 0 | 1
+	status: Status
 	description: string
 }
 
@@ -15,5 +15,5 @@ export type IDictDataItem = {
 	id: string
 	name: string
 	value: string | number
-	status: 0 | 1
+	status: Status
 }

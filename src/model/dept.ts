@@ -2,7 +2,7 @@ export interface IDeptItem {
 	id: string
 	name: string
 	sort: number
-	status: 0 | 1
+	status: Status
 	createTime: string
 	parentId: string
 	children?: IDeptItem[]

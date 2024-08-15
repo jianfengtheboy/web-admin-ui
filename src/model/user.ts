@@ -9,7 +9,7 @@ export interface IUserInfo {
 	// 头像
 	avatar: string
 	// 性别  0：未知 1: 男性 2：女性
-	gender?: 0 | 1 | 2
+	gender?: Gender
 	// 角色
 	roles: string[]
 	// 权限
@@ -25,11 +25,11 @@ export interface IUserItem {
 	deptName: string
 	username: string
 	nickname: string
-	gender: number
+	gender: Gender
 	avatar: string
 	email: string
 	phone: string
-	status: 0 | 1
+	status: Status
 	type: 1 | 2
 	description: string
 }
