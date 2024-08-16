@@ -1,6 +1,6 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { findTree } from 'xe-utils'
-import { resultSuccess, resultError } from '../../_utils'
+import { resultSuccess, resultError, getDelayTime } from '../../_utils'
 import { deptData } from '../../data/dept'
 
 export default [
@@ -8,7 +8,7 @@ export default [
 	{
 		url: '/dev-api/system/dept',
 		method: 'get',
-		timeout: 100,
+		timeout: getDelayTime(),
 		response: () => {
 			return resultSuccess(deptData)
 		}
@@ -17,7 +17,7 @@ export default [
 	{
 		url: '/dev-api/system/dept/save',
 		method: 'post',
-		timeout: 350,
+		timeout: getDelayTime(),
 		response: () => {
 			return resultSuccess(true)
 		}
@@ -26,7 +26,7 @@ export default [
 	{
 		url: '/dev-api/system/dept/delete',
 		method: 'post',
-		timeout: 300,
+		timeout: getDelayTime(),
 		response: () => {
 			return resultSuccess(true)
 		}
@@ -35,7 +35,7 @@ export default [
 	{
 		url: '/dev-api/system/dept/detail',
 		method: 'get',
-		timeout: 100,
+		timeout: getDelayTime(),
 		response: ({ query }) => {
 			const { id } = query
 			const obj = findTree(deptData, i => i.id === id)

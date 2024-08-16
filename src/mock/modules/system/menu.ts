@@ -1,5 +1,5 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess, resultError } from '../../_utils'
+import { resultSuccess, resultError, getDelayTime } from '../../_utils'
 import { mapTree, findTree } from 'xe-utils'
 import { menus as menuData } from '../../data/menu'
 
@@ -8,7 +8,7 @@ export default [
 	{
 		url: '/dev-api/system/menu',
 		method: 'get',
-		timeout: 100,
+		timeout: getDelayTime(),
 		response: () => {
 			return resultSuccess(mapTree(JSON.parse(JSON.stringify(menuData)), i => ({ ...i })))
 		}
@@ -17,7 +17,7 @@ export default [
 	{
 		url: '/dev-api/system/menu/detail',
 		method: 'get',
-		timeout: 150,
+		timeout: getDelayTime(),
 		response: ({ query }) => {
 			const { id } = query
 			const obj = findTree(menuData, i => i.id === id)
@@ -32,7 +32,7 @@ export default [
 	{
 		url: '/dev-api/system/menu/save',
 		method: 'post',
-		timeout: 350,
+		timeout: getDelayTime(),
 		response: () => {
 			return resultSuccess(true)
 		}
@@ -41,7 +41,7 @@ export default [
 	{
 		url: '/dev-api/system/menu/delete',
 		method: 'post',
-		timeout: 100,
+		timeout: getDelayTime(),
 		response: () => {
 			return resultSuccess(true)
 		}
@@ -50,7 +50,7 @@ export default [
 	{
 		url: '/dev-api/system/menu/options',
 		method: 'get',
-		timeout: 120,
+		timeout: getDelayTime(),
 		response: () => {
 			const data = mapTree(JSON.parse(JSON.stringify(menuData)), i => ({
 				id: i.id,

@@ -10,6 +10,8 @@ import useTable from './base/useTable'
 
 // business hooks
 import useDept from './business/useDept'
+import useDict from './business/useDict'
+import useFormCurd from './business/useFormCrud'
 import useRole from './business/useRole'
 
 export {
@@ -22,5 +24,7 @@ export {
 	useRequest,
 	useTable,
 	useDept,
+	useDict,
+	useFormCurd,
 	useRole
 }

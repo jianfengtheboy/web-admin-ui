@@ -108,7 +108,7 @@ const storeSetup = () => {
 		closeCurrent,
 		closeOther,
 		closeAll,
-		reset,
+		reset
 	}
 }
 

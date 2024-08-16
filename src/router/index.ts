@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
+import { useRouteStore } from '@/store'
 import systemRoute from './modules/systemRote'
 
 // 默认布局
@@ -79,9 +80,10 @@ const router = createRouter({
  */
 export function resetRouter() {
 	try {
-		router.getRoutes().forEach(route => {
+		const { asyncRoutes } = useRouteStore()
+		asyncRoutes.forEach(route => {
 			const { name } = route
-			if (name && name !== 'Home') {
+			if (name) {
 				router.hasRoute(name) && router.removeRoute(name)
 			}
 		})

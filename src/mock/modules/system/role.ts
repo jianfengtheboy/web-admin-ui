@@ -1,6 +1,6 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { eachTree } from 'xe-utils'
-import { resultSuccess, resultError } from '../../_utils'
+import { resultSuccess, resultError, getDelayTime } from '../../_utils'
 import { roleData } from '../../data/role'
 import { menus } from '../../data/menu'
 
@@ -9,7 +9,7 @@ export default [
 	{
 		url: '/dev-api/system/role',
 		method: 'get',
-		timeout: 100,
+		timeout: getDelayTime(),
 		response: () => {
 			return resultSuccess({
 				total: roleData.length,
@@ -21,7 +21,7 @@ export default [
 	{
 		url: '/dev-api/system/role/save',
 		method: 'post',
-		timeout: 350,
+		timeout: getDelayTime(),
 		response: () => {
 			return resultSuccess(true)
 		}
@@ -30,7 +30,7 @@ export default [
 	{
 		url: '/dev-api/system/role/delete',
 		method: 'post',
-		timeout: 350,
+		timeout: getDelayTime(),
 		response: ({ body }) => {
 			const { ids } = body
 			return resultSuccess(ids)
@@ -40,7 +40,7 @@ export default [
 	{
 		url: '/dev-api/system/role/detail',
 		method: 'get',
-		timeout: 100,
+		timeout: getDelayTime(),
 		response: ({ query }) => {
 			const { id } = query
 			const index = roleData.findIndex(i => i.id === id)
@@ -55,7 +55,7 @@ export default [
 	{
 		url: '/dev-api/system/role/menuIds',
 		method: 'get',
-		timeout: 350,
+		timeout: getDelayTime(),
 		response: ({ query }) => {
 			const { role } = query
 			if (role === 'role_user') {
@@ -76,7 +76,7 @@ export default [
 	{
 		url: '/dev-api/system/role/menuIds/save',
 		method: 'post',
-		timeout: 120,
+		timeout: getDelayTime(),
 		response: () => {
 			return resultSuccess(true)
 		}

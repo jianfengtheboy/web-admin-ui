@@ -32,11 +32,11 @@ export const filterTree: FilterTree = (values, fn) => {
 	return data
 }
 
-type SortTree = <T extends { sort: number; children?: T[] }>(array: T[]) => T[]
 /**
  * @desc 排序树
  * @param { values } 数组
  */
+type SortTree = <T extends { sort: number; children?: T[] }>(array: T[]) => T[]
 export const sortTree: SortTree = values => {
 	values?.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0)) // 排序
 	return mapTree(values, item => {

@@ -1,9 +1,10 @@
-# 1.0.0 (2024-08-15)
+# 1.0.0 (2024-08-16)
 
 
 ### 2024-08-15
 
 * **完善baseHooks:** 🧱 chore: 完善baseHooks ([1f65ba8](https://github.com/jianfengtheboy/web-admin-ui/commit/1f65ba8))
+* **完善model中的接口定义:** 🧱 chore: 完善model中的接口定义 ([3cb9df4](https://github.com/jianfengtheboy/web-admin-ui/commit/3cb9df4))
 
 
 ### 2024-08-14

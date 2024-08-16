@@ -1,5 +1,6 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess, resultError } from '../../_utils'
+import type { SelectOptionData } from '@arco-design/web-vue'
+import { resultSuccess, resultError, getDelayTime } from '../../_utils'
 import { dictData } from '../../data/dict'
 
 export default [
@@ -7,7 +8,7 @@ export default [
 	{
 		url: '/dev-api/system/dict',
 		method: 'get',
-		timeout: 100,
+		timeout: getDelayTime(),
 		response: () => {
 			return resultSuccess({
 				total: dictData.length,
@@ -19,7 +20,7 @@ export default [
 	{
 		url: '/dev-api/system/dict/save',
 		method: 'post',
-		timeout: 300,
+		timeout: getDelayTime(),
 		response: () => {
 			return resultSuccess(true)
 		}
@@ -28,7 +29,7 @@ export default [
 	{
 		url: '/dev-api/system/dict/delete',
 		method: 'post',
-		timeout: 350,
+		timeout: getDelayTime(),
 		response: ({ body }) => {
 			const { ids } = body
 			return resultSuccess(ids)
@@ -38,7 +39,7 @@ export default [
 	{
 		url: '/dev-api/system/dict/detail',
 		method: 'get',
-		timeout: 200,
+		timeout: getDelayTime(),
 		response: ({ query }) => {
 			const { id } = query
 			const obj = dictData.find(i => i.id === id)
@@ -53,7 +54,7 @@ export default [
 	{
 		url: '/dev-api/system/dict/dataList',
 		method: 'get',
-		timeout: 100,
+		timeout: getDelayTime(),
 		response: ({ query }) => {
 			const { code } = query
 			const obj = dictData.find(i => i.code === code)
@@ -69,7 +70,7 @@ export default [
 	{
 		url: '/dev-api/system/dict/dataSave',
 		method: 'post',
-		timeout: 260,
+		timeout: getDelayTime(),
 		response: () => {
 			return resultSuccess(true)
 		}
@@ -78,7 +79,7 @@ export default [
 	{
 		url: '/dev-api/system/dict/dataDelete',
 		method: 'post',
-		timeout: 320,
+		timeout: getDelayTime(),
 		response: ({ body }) => {
 			const { ids } = body
 			return resultSuccess(ids)
@@ -88,7 +89,7 @@ export default [
 	{
 		url: '/dev-api/system/dict/dataDetail',
 		method: 'get',
-		timeout: 350,
+		timeout: getDelayTime(),
 		response: ({ query }) => {
 			const { id, code } = query
 			const obj = dictData.find(i => i.code === code)
@@ -100,6 +101,25 @@ export default [
 				return resultError(null, '无法查找数据！', 403)
 			}
 			return resultSuccess(item)
+		}
+	},
+	// 获取字典数据映射
+	{
+		url: '/dev-api/system/dictData',
+		method: 'get',
+		timeout: getDelayTime(),
+		response: () => {
+			const obj: Record<string, SelectOptionData[]> = {}
+			dictData.forEach(i => {
+				obj[i.code] = i.list.map(i => {
+					const obj: SelectOptionData = { label: i.name, value: i.value }
+					if (i.color) {
+						obj.tagProps = { color: i.color }
+					}
+					return obj
+				})
+			})
+			return resultSuccess(obj)
 		}
 	}
 ] as MockMethod[]

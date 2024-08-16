@@ -6,7 +6,7 @@ export const userData = [
 		disabled: true,
 		username: 'Admin',
 		nickname: '管理员',
-		gender: 0,
+		gender: 1,
 		avatar:
 			'https://img.yxs.shenyecg.com/Image/UDlExvo5IqDTbQyObux0yzcxebpCxZrz/jZcEpQPrkP.jpg?x-oss-process=image/resize,m_fill,limit_0,w_200,h_200',
 		email: 'jianfengtheboy@163.com',
@@ -27,7 +27,7 @@ export const userData = [
 		disabled: false,
 		username: 'immortal',
 		nickname: '大罗金仙',
-		gender: 1,
+		gender: 2,
 		avatar:
 			'https://img.yxs.shenyecg.com/Image/QDR2HeyIOGf1znAwAI8vRtmsi6bgagFC/rCx2SyWC6K.jpg?x-oss-process=image/resize,w_1121',
 		email: 'immortal@qq.com',

@@ -1,6 +1,5 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { filterTree } from '@/utils/route'
-import { resultSuccess, resultError } from '../_utils'
+import { USER_TOKENS, isAdmin, filterTree, resultSuccess, resultError, getDelayTime } from '../_utils'
 import { menus } from '../data/menu'
 import { userData } from '../data/user'
 
@@ -9,7 +8,7 @@ export default [
 	{
 		url: '/dev-api/captcha',
 		methods: 'get',
-		timeout: 10,
+		timeout: getDelayTime(),
 		response: () => {
 			const data = {
 				image:
@@ -23,7 +22,7 @@ export default [
 	{
 		url: '/dev-api/login',
 		method: 'post',
-		timeout: 300,
+		timeout: getDelayTime(),
 		response: ({ body }) => {
 			const { username, password, code, uuid } = body
 			if (!username) {
@@ -37,12 +36,12 @@ export default [
 			}
 			if (username === 'admin' && password === '123456') {
 				return resultSuccess({
-					token: 'TOKEN-admin'
+					token: 'token_admin'
 				})
 			}
 			if (username === 'user' && password === '123456') {
 				return resultSuccess({
-					token: 'TOKEN-user'
+					token: 'token_user'
 				})
 			}
 			return resultError(null, '账号或者密码错误')
@@ -52,7 +51,7 @@ export default [
 	{
 		url: '/dev-api/logout',
 		method: 'post',
-		timeout: 300,
+		timeout: getDelayTime(),
 		response: () => {
 			return resultSuccess(null)
 		}
@@ -61,10 +60,10 @@ export default [
 	{
 		url: '/dev-api/getUserInfo',
 		method: 'get',
-		timeout: 100,
+		timeout: getDelayTime(),
 		response: ({ headers }) => {
 			const token = headers.authorization
-			if (token && ['TOKEN-admin', 'TOKEN-user'].includes(token)) {
+			if (token && USER_TOKENS.includes(token)) {
 				const userList = userData.map(i => ({
 					id: i.id,
 					nickname: i.nickname,
@@ -72,7 +71,7 @@ export default [
 					roles: i.roleIds,
 					permissions: i.permissions
 				}))
-				const isAdmin = token === 'TOKEN-admin'
+				const isAdmin = token === 'token_admin'
 				return resultSuccess(isAdmin ? userList[0] : userList[1])
 			} else {
 				return resultError(null, 'token失效', 401)
@@ -83,11 +82,11 @@ export default [
 	{
 		url: '/dev-api/getRouters',
 		method: 'get',
-		timeout: 300,
+		timeout: getDelayTime(),
 		response: ({ headers }) => {
 			const token = headers.authorization
-			if (token && ['TOKEN-admin', 'TOKEN-user'].includes(token)) {
-				const roles = token === 'TOKEN-admin' ? ['role_admin'] : ['role_user']
+			if (token && USER_TOKENS.includes(token)) {
+				const roles = isAdmin(token) ? ['role_admin'] : ['role_user']
 				// 如果是超级管理员角色
 				if (roles.includes('role_admin')) {
 					const data = filterTree(JSON.parse(JSON.stringify(menus)), (i: any) => [1, 2].includes(i.type))

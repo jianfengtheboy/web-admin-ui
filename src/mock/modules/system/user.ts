@@ -1,5 +1,5 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess, resultError } from '../../_utils'
+import { resultSuccess, resultError, getDelayTime } from '../../_utils'
 import { userData } from '../../data/user'
 
 export default [
@@ -7,7 +7,7 @@ export default [
 	{
 		url: '/dev-api/system/user',
 		method: 'get',
-		timeout: 100,
+		timeout: getDelayTime(),
 		response: () => {
 			return resultSuccess({
 				total: userData.length,
@@ -19,7 +19,7 @@ export default [
 	{
 		url: '/dev-api/system/user/save',
 		method: 'post',
-		timeout: 350,
+		timeout: getDelayTime(),
 		response: () => {
 			return resultSuccess(true)
 		}
@@ -28,7 +28,7 @@ export default [
 	{
 		url: '/dev-api/system/user/delete',
 		method: 'post',
-		timeout: 350,
+		timeout: getDelayTime(),
 		response: ({ body }) => {
 			const { ids } = body
 			return resultSuccess(ids)
@@ -38,7 +38,7 @@ export default [
 	{
 		url: '/dev-api/system/user/detail',
 		method: 'get',
-		timeout: 100,
+		timeout: getDelayTime(),
 		response: ({ query }) => {
 			const { id } = query
 			const index = userData.findIndex(i => i.id === id)

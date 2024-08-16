@@ -23,3 +23,6 @@ export const deleteSystemDictData = params => http.post('/system/dict/dataDelete
 
 // 字典数据详情
 export const getSystemDictDataDetail = params => http.get('/system/dict/dataDetail', params)
+
+// 获取字典数据映射
+export const getSystemDictData = () => http.get('/system/dictData')

@@ -13,9 +13,9 @@ export const useNoticeStore = defineStore('notice', {
 		async fetchNotice() {
 			try {
 				const response = await window.$apis.notice.getNotice()
-				if (response.code === 200) {
+				if (response && response.code === 200) {
 					this.noticeBadge = response.data.total
-					this.noticeData = response.data.rows
+					this.noticeData = response.data.rows || []
 				}
 			} catch (error) {}
 		}
