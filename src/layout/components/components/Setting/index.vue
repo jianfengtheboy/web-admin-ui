@@ -5,12 +5,8 @@ import { useSettingStore } from '@/store'
 import LayoutItem from '../LayoutItem/index.vue'
 
 const settingStore = useSettingStore()
+
 const visible = ref(false)
-
-if (settingStore.themeColor) {
-	settingStore.setThemeColor(settingStore.themeColor)
-}
-
 const open = () => {
 	visible.value = true
 }
@@ -59,7 +55,8 @@ const changeColor = (colorObj: ColorObj) => {
 const tabModeList: App.TabItem[] = [
 	{ label: '卡片', value: 'card' },
 	{ label: '间隔卡片', value: 'card-gutter' },
-	{ label: '圆角', value: 'rounded' }
+	{ label: '圆角', value: 'rounded' },
+	{ label: '自定义', value: 'custom' }
 ]
 
 const animateModeList: App.AnimateItem[] = [
@@ -78,28 +75,8 @@ const animateModeList: App.AnimateItem[] = [
 			<a-divider orientation="center">系统布局</a-divider>
 			<a-row justify="center">
 				<a-space>
-					<a-badge>
-						<template #content>
-							<icon-check-circle-fill
-								v-if="settingStore.layout === 'left'"
-								style="color: rgb(var(--success-6))"
-								:size="16"
-							/>
-						</template>
-						<LayoutItem mode="left" @click="settingStore.layout = 'left'" />
-						<p class="layout-text">默认布局</p>
-					</a-badge>
-					<a-badge>
-						<template #content>
-							<icon-check-circle-fill
-								v-if="settingStore.layout === 'mix'"
-								:size="16"
-								style="color: rgb(var(--success-6))"
-							/>
-						</template>
-						<LayoutItem mode="mix" @click="settingStore.layout = 'mix'" />
-						<p class="layout-text">混合布局</p>
-					</a-badge>
+					<LayoutItem mode="left" name="默认布局" @click="settingStore.layout = 'left'" />
+					<LayoutItem mode="mix" name="混合布局" @click="settingStore.layout = 'mix'" />
 				</a-space>
 			</a-row>
 
@@ -112,7 +89,7 @@ const animateModeList: App.AnimateItem[] = [
 					:color="settingStore.themeColor"
 					:sucker-hide="true"
 					:colors-default="defaultColorList"
-					@changeColor="changeColor"
+					@change-color="changeColor"
 				/>
 			</a-row>
 
@@ -160,12 +137,5 @@ const animateModeList: App.AnimateItem[] = [
 <style lang="less" scoped>
 :deep(.arco-descriptions-item-label-block) {
 	color: var(--color-text-1);
-}
-
-.layout-text {
-	font-size: 12px;
-	text-align: center;
-	color: var(--color-text-2);
-	margin-top: 4px;
 }
 </style>

@@ -7,7 +7,7 @@ import { isExternal } from '@/utils/validate'
 import MenuItem from './components/MenuItem.vue'
 
 const emit = defineEmits<{
-	(e: 'menuItemClickAfter'): void
+	(e: 'menu-item-click-after'): void
 }>()
 
 interface IProps {
@@ -15,18 +15,18 @@ interface IProps {
 	menuStyle?: CSSProperties
 }
 
-const props = withDefaults(defineProps<IProps>(), {})
+const props = defineProps<IProps>()
 
 const { isDesktop } = useDevice()
 const route = useRoute()
 const router = useRouter()
-const appStore = useSettingStore()
+const settingStore = useSettingStore()
 const routeStore = useRouteStore()
 const sidebarRoutes = computed(() => (props.menus ? props.menus : routeStore.routes))
 
 // 菜单垂直模式、水平模式
 const mode = computed(() => {
-	if (!['left', 'mix'].includes(appStore.layout)) {
+	if (!['left', 'mix'].includes(settingStore.layout)) {
 		return 'horizontal'
 	} else {
 		return 'vertical'
@@ -35,7 +35,7 @@ const mode = computed(() => {
 
 // 是否默认展开选中的菜单
 const autoOpenSelected = computed(() => {
-	if (!['left', 'mix'].includes(appStore.layout)) {
+	if (!['left', 'mix'].includes(settingStore.layout)) {
 		return false
 	} else {
 		return true
@@ -58,13 +58,13 @@ const onMenuItemClick = (key: string) => {
 		return
 	}
 	router.push({ path: key })
-	emit('menuItemClickAfter')
+	emit('menu-item-click-after')
 }
 
 // 折叠状态改变时触发
 const onCollapse = (collapsed: boolean) => {
-	if (appStore.layout === 'mix') {
-		appStore.menuCollapse = collapsed
+	if (settingStore.layout === 'mix') {
+		settingStore.menuCollapse = collapsed
 	}
 }
 </script>
@@ -74,15 +74,15 @@ const onCollapse = (collapsed: boolean) => {
 		:mode="mode"
 		:selected-keys="activeMenu"
 		:auto-open-selected="autoOpenSelected"
-		:accordion="appStore.menuAccordion"
-		:breakpoint="appStore.layout === 'mix' ? 'xl' : undefined"
+		:accordion="settingStore.menuAccordion"
+		:breakpoint="settingStore.layout === 'mix' ? 'xl' : undefined"
 		:trigger-props="{ animationName: 'slide-dynamic-origin' }"
-		:collapsed="!isDesktop ? false : appStore.menuCollapse"
+		:collapsed="!isDesktop ? false : settingStore.menuCollapse"
 		:style="menuStyle"
 		class="h-full"
 		@menu-item-click="onMenuItemClick"
 		@collapse="onCollapse"
 	>
-		<MenuItem v-for="(route, index) in sidebarRoutes" :key="route.path + index" :item="route" />
+		<MenuItem v-for="(item, index) in sidebarRoutes" :key="item.path + index" :item="item" />
 	</a-menu>
 </template>

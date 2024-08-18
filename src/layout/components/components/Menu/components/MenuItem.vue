@@ -8,7 +8,7 @@ interface IProps {
 	item: RouteRecordRaw
 }
 
-const props = withDefaults(defineProps<IProps>(), {})
+const props = defineProps<IProps>()
 
 // 如果hidden: false那么代表这个路由项显示在左侧菜单栏中
 // 如果props.item的子项chidren只有一个hidden: false的子元素, 那么onlyOneChild就表示这个子元素

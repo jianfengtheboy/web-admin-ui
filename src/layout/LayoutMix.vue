@@ -12,19 +12,21 @@ import HeaderRightBar from './components/components/HeaderRightBar/index.vue'
 import TabBar from './components/TabBar/index.vue'
 import Main from './components/Main/index.vue'
 
-const settingStore = useSettingStore()
 const route = useRoute()
 const router = useRouter()
 const routeStore = useRouteStore()
+const settingStore = useSettingStore()
 const { isDesktop } = useDevice()
 
 // 过滤是菜单的路由
-const menuRoutes = filterTree(routeStore.routes, i => i.meta?.hidden === false)
+const cloneRoutes = JSON.parse(JSON.stringify(routeStore.routes)) as RouteRecordRaw[]
+const menuRoutes = filterTree(cloneRoutes, i => i.meta?.hidden === false)
 
 // 顶部一级菜单
 const topMenus = ref<RouteRecordRaw[]>([])
 topMenus.value = JSON.parse(JSON.stringify(menuRoutes))
 
+// 获取菜单icon
 const getMenuIcon = (item: RouteRecordRaw, key: 'svgIcon' | 'icon') => {
 	return item.meta?.[key] || item.children?.[0].meta?.[key]
 }
