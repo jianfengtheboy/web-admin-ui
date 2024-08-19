@@ -1,5 +1,5 @@
 import { resetRouter } from '@/router'
-import { setToken, clearToken } from '@/utils/auth'
+import { getToken, setToken, clearToken } from '@/utils/auth'
 import { resetHasRouteFlag } from '@/router/permission'
 import request from '@/request'
 import { AppStoreName } from '@/config/domain'
@@ -7,7 +7,7 @@ import { IUserInfo } from '@/model/user'
 
 interface IState {
 	// token
-	token: string
+	token: string | null
 	// 用户信息
 	userInfo: Pick<IUserInfo, 'id' | 'userName' | 'nickName' | 'avatar' | 'gender'>
 	// 角色
@@ -18,13 +18,13 @@ interface IState {
 
 export const useAppStore = defineStore('app', {
 	state: (): IState => ({
-		token: '',
+		token: getToken(),
 		userInfo: {
 			id: '',
 			userName: '',
 			nickName: '',
 			avatar: '',
-			gender: 0
+			gender: 3
 		},
 		roles: [],
 		permissions: []

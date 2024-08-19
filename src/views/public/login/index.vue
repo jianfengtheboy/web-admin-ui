@@ -6,6 +6,7 @@ import Cookies from 'js-cookie'
 import { useAppStore } from '@/store'
 import { useLoading, useDevice } from '@/hooks'
 import { SystemName, AppStoreName } from '@/config/domain'
+import * as Regexp from '@/utils/regexp'
 import LoginBg from './components/index.vue'
 import loginImg from '@/assets/images/login/login-img.svg'
 
@@ -22,7 +23,10 @@ const formData = reactive({
 })
 const formRules: FormInstance['rules'] = {
 	username: [{ required: true, message: '请输入账号' }],
-	password: [{ required: true, message: '请输入密码' }],
+	password: [
+		{ required: true, message: '请输入密码' },
+		{ match: Regexp.Code_6, message: '密码格式不正确' }
+	],
 	code: [{ required: true, message: '请输入验证码' }]
 }
 
@@ -57,8 +61,8 @@ const errorMessage = ref('')
 const formRef = ref<FormInstance>()
 const handleLogin = async () => {
 	try {
-		const flag = await formRef.value?.validate()
-		if (flag) return
+		const valid = await formRef.value?.validate()
+		if (valid) return
 
 		setLoading(true)
 		const params = window.$_.cloneDeep(formData)
@@ -73,7 +77,7 @@ const handleLogin = async () => {
 		})
 		Message.success('登录成功')
 	} catch (error) {
-		errorMessage.value = error as string
+		errorMessage.value = (error as Error).message
 		setTimeout(() => {
 			loadCaptcha()
 		}, 500)

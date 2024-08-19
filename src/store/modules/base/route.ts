@@ -130,7 +130,7 @@ const storeSetup = () => {
 export const useRouteStore = defineStore('route', storeSetup, {
 	persist: {
 		key: `${AppStoreName}_ROUTE`,
-		paths: ['routes'],
+		paths: ['routes', 'asyncRoutes'],
 		storage: localStorage
 	}
 })

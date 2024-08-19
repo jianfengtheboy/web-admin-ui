@@ -7,32 +7,30 @@ const props = withDefaults(defineProps<IProps>(), {
 	code: 403
 })
 
-const router = useRouter()
-
-const countDownTime = ref(5)
-let timer = ref()
-
 onMounted(() => {
 	onCountDownTime()
 })
 
 onBeforeUnmount(() => {
-	clearInterval(timer.value)
+	clearInterval(timer)
 })
 
 // 返回页面
+const router = useRouter()
 const back = () => {
 	router.replace({ path: '/' })
 }
 
 // 倒计时
+const countDownTime = ref(5)
+let timer: NodeJS.Timer
 const onCountDownTime = () => {
-	timer.value = setInterval(() => {
+	timer = setInterval(() => {
 		if (countDownTime.value) {
 			countDownTime.value--
 		} else {
 			back()
-			clearInterval(timer.value)
+			clearInterval(timer)
 		}
 	}, 1000)
 }

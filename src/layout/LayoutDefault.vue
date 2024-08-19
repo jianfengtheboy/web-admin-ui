@@ -3,8 +3,6 @@ import SideBar from './components/SideBar/index.vue'
 import HeaderBar from './components/HeaderBar/index.vue'
 import TabBar from './components/TabBar/index.vue'
 import Main from './components/Main/index.vue'
-
-defineOptions({ name: 'Layout' })
 </script>
 
 <template>
