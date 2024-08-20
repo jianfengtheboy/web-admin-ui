@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import { mapTree, toTreeArray } from 'xe-utils'
+import { mapTree } from 'xe-utils'
 import { constantRoutes } from '@/router'
 import { getRoutes } from '@/apis/modules/common'
 import { AppStoreName } from '@/config/domain'
@@ -70,28 +70,6 @@ const formatAsyncRoutes = (menus: IMenuItem[]) => {
 	return routes as RouteRecordRaw[]
 }
 
-// 判断路由层级是否大于 2
-export const isMultipleRoute = (route: RouteRecordRaw) => {
-	const children = route.children
-	if (children?.length) {
-		// 只要有一个子路由的 children 长度大于 0，就说明是三级及其以上路由
-		return children.some(child => child.children?.length)
-	}
-	return false
-}
-
-// 路由降级（把三级及其以上的路由转化为二级路由）
-export const flatMultiLevelRoutes = (routes: RouteRecordRaw[]) => {
-	const cloneRoutes = window.$_.cloneDeep(routes)
-	cloneRoutes.forEach(route => {
-		if (isMultipleRoute(route)) {
-			const flatRoutes = toTreeArray(route.children)
-			route.children = flatRoutes.map(i => window.$_.omit(i, 'children')) as RouteRecordRaw[]
-		}
-	})
-	return cloneRoutes
-}
-
 const storeSetup = () => {
 	// 所有路由（常驻路由 + 动态路由）
 	const routes = ref<RouteRecordRaw[]>([])
@@ -112,9 +90,7 @@ const storeSetup = () => {
 				if (response.code === 200) {
 					const asyncRoutes = formatAsyncRoutes(response.data)
 					setRoutes(asyncRoutes)
-					const cloneRoutes = window.$_.cloneDeep(asyncRoutes)
-					const flatRoutes = flatMultiLevelRoutes(cloneRoutes as RouteRecordRaw[])
-					resolve(flatRoutes)
+					resolve(asyncRoutes)
 				}
 			})
 		})
