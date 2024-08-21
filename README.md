@@ -44,7 +44,7 @@ vue3 管理系统项目模版
 - 4、pinia@^2.1.7
 - 5、typescript@^5.2.2
 - 6、axios@^1.6.0
-- 7、arco-design/web-vue@^2.55.0
+- 7、arco-design/web-vue@^2.56.0
 - 8、arco-design/color@^0.4.0
 - 9、codemirror/lang-javascript@^6.2.2
 - 10、codemirror/lang-vue@^0.1.3
@@ -70,7 +70,6 @@ vue3 管理系统项目模版
 - 30、husky@^8.0.3
 - 31、less@^4.2.0
 - 32、tailwindcss@3.1.4
-- 33、typescript@^5.0.2
 
 #### 2.2、项目结构
 

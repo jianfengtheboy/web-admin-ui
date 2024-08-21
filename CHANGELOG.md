@@ -1,4 +1,24 @@
-# 1.0.0 (2024-08-16)
+# 1.0.0 (2024-08-21)
+
+
+### 2024-08-20
+
+* **解决切换到首页时tabbar组件上tag丢失的问题:** 🧱 chore: 解决切换到首页时tabbar组件上tag丢失的问题 ([a23adb6](https://github.com/jianfengtheboy/web-admin-ui/commit/a23adb6))
+
+
+### 2024-08-19
+
+* **完善框架:** 🧱 chore: 完善框架 ([67354e0](https://github.com/jianfengtheboy/web-admin-ui/commit/67354e0))
+
+
+### 2024-08-18
+
+* **完善框架:** 🧱 chore: 完善框架 ([56bcd0d](https://github.com/jianfengtheboy/web-admin-ui/commit/56bcd0d))
+
+
+### 2024-08-16
+
+* **完善框架:** 🧱 chore: 完善框架 ([6a2da74](https://github.com/jianfengtheboy/web-admin-ui/commit/6a2da74))
 
 
 ### 2024-08-15
