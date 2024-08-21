@@ -17,7 +17,7 @@ const getHome = () => {
 }
 
 const breadcrumbList = ref<RouteLocationMatched[]>([])
-function getBreadcrumbList() {
+const getBreadcrumbList = () => {
 	getHome()
 	const cloneRoutes = JSON.parse(JSON.stringify(routes)) as RouteLocationMatched[]
 	const obj = findTree(cloneRoutes, i => i.path === route.path)
@@ -55,7 +55,7 @@ const handleLink = (item: RouteLocationMatched) => {
 			</span>
 			<span
 				v-else
-				class="breadcrumb-item-title overflow-hidden whitespace-nowrap text-ellipsis"
+				class="breadcrumb-item-title overflow-hidden whitespace-nowrap text-ellipsis cursor-pointer"
 				@click="handleLink(item)"
 			>
 				{{ item.meta.title }}
@@ -67,7 +67,7 @@ const handleLink = (item: RouteLocationMatched) => {
 <style lang="less" scoped>
 .breadcrumb-item-title {
 	transition: all 0.3s;
-	cursor: pointer;
+
 	&:hover {
 		color: var(--color-theme);
 		font-weight: 600;

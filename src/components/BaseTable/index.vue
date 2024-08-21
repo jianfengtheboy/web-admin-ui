@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { DropdownInstance, TableColumnData, TableInstance } from '@arco-design/web-vue'
+import { VueDraggable } from 'vue-draggable-plus'
 
 defineOptions({
 	name: 'BaseTable',
@@ -75,7 +76,9 @@ watch(
 	() => {
 		resetSettingColumns()
 	},
-	{ immediate: true }
+	{
+		immediate: true
+	}
 )
 
 // 排序和过滤可显示的列数据

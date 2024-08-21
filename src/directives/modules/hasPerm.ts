@@ -1,5 +1,5 @@
 import type { DirectiveBinding, Directive } from 'vue'
-import { useAppStore } from '@/store'
+import { hasPermOr } from '@/utils/permission'
 
 /**
  * @desc v-hasPerm 操作权限处理
@@ -7,15 +7,9 @@ import { useAppStore } from '@/store'
  */
 function checkPermission(el: HTMLElement, binding: DirectiveBinding) {
 	const { value } = binding
-	const all_permission = '*:*:*'
-	const appStore = useAppStore()
-
 	if (value && Array.isArray(value) && value.length) {
-		const permissionValues: string[] = value
-		const hasPermission = appStore.permissions.some(perm => {
-			return all_permission === perm || permissionValues.includes(perm)
-		})
-		if (!hasPermission) {
+		const flag = hasPermOr(value)
+		if (!flag) {
 			el.parentNode && el.parentNode.removeChild(el)
 		}
 	} else {

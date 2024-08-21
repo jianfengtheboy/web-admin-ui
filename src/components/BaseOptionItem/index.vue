@@ -28,7 +28,7 @@ const handleClick = () => {
 		:class="{ more: props.more, active: props.active }"
 		@click="handleClick"
 	>
-		<section class="flex items-center">
+		<div class="flex items-center">
 			<span class="icon-wrapper flex items-center">
 				<slot name="icon">
 					<BaseIcon :name="props.icon" :size="16" />
@@ -37,7 +37,7 @@ const handleClick = () => {
 			<slot>
 				<span>{{ props.label }}</span>
 			</slot>
-		</section>
+		</div>
 		<IconRight v-if="props.more" />
 	</li>
 </template>

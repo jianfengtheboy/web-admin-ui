@@ -70,6 +70,7 @@ vue3 管理系统项目模版
 - 30、husky@^8.0.3
 - 31、less@^4.2.0
 - 32、tailwindcss@3.1.4
+- 33、vue-draggable-plus^0.5.3
 
 #### 2.2、项目结构
 

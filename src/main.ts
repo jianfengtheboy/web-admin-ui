@@ -7,7 +7,7 @@ import _ from 'lodash'
 // 自定义指令
 import directives from './directives'
 // 引入 Arco Design 组件库以及自定义主题
-import ArcoVue, { Card, Modal } from '@arco-design/web-vue'
+import ArcoVue, { Card, Modal, Drawer } from '@arco-design/web-vue'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 // 支持SVG
 import 'virtual:svg-icons-register'
@@ -21,6 +21,7 @@ window.$_ = _
 
 const app = createApp(App)
 Modal._context = app._context
+Drawer._context = app._context
 Card.props.bordered = false
 
 app.use(router)

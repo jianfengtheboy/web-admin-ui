@@ -33,7 +33,9 @@ export default function usePagination(callback: Callback, options: Options = { d
 			pagination.simple = ['xs'].includes(breakpoint.value)
 			pagination.showTotal = !['xs'].includes(breakpoint.value)
 		},
-		{ immediate: true }
+		{
+			immediate: true
+		}
 	)
 
 	const changeCurrent = pagination.onChange

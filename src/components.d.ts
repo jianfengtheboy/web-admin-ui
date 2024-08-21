@@ -8,6 +8,10 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     BaseBreadCrumb: typeof import('./components/BaseBreadCrumb/index.vue')['default']
+    BaseCellAvatar: typeof import('./components/BaseCellAvatar/index.vue')['default']
+    BaseCellGender: typeof import('./components/BaseCellGender/index.vue')['default']
+    BaseCellStatus: typeof import('./components/BaseCellStatus/index.vue')['default']
+    BaseCellTag: typeof import('./components/BaseCellTag/index.vue')['default']
     BaseCodeView: typeof import('./components/BaseCodeView/index.vue')['default']
     BaseDot: typeof import('./components/BaseDot/index.tsx')['default']
     BaseForm: typeof import('./components/BaseForm/src/BaseForm.vue')['default']

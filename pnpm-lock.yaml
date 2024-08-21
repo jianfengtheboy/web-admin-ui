@@ -68,6 +68,9 @@ importers:
       vue-color-kit:
         specifier: ^1.0.6
         version: 1.0.6(vue@3.3.7(typescript@5.2.2))
+      vue-draggable-plus:
+        specifier: ^0.5.3
+        version: 0.5.3(@types/sortablejs@1.15.8)
       vue-router:
         specifier: ^4.0.13
         version: 4.0.13(vue@3.3.7(typescript@5.2.2))
@@ -686,6 +689,9 @@ packages:
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
+
+  '@types/sortablejs@1.15.8':
+    resolution: {integrity: sha512-b79830lW+RZfwaztgs1aVPgbasJ8e7AXtZYHTELNXZPsERt4ymJdjV4OccDbHQAvHrCcFpbF78jkm0R6h/pZVg==}
 
   '@types/svgo@2.6.4':
     resolution: {integrity: sha512-l4cmyPEckf8moNYHdJ+4wkHvFxjyW6ulm9l4YGaOxeyBWPhBOT0gvni1InpFPdzx1dKf/2s62qGITwxNWnPQng==}
@@ -3213,6 +3219,15 @@ packages:
       '@vue/composition-api':
         optional: true
 
+  vue-draggable-plus@0.5.3:
+    resolution: {integrity: sha512-dwKDzZ8io3y7k2iuIwVwiGrdiq5C0S7Et7nt5Gz5KjpBS9MtZGFP+L4FJPWGSLYleOT8HmVuCXTZYjGet7wC0g==}
+    peerDependencies:
+      '@types/sortablejs': ^1.15.0
+      '@vue/composition-api': '*'
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+
   vue-router@4.0.13:
     resolution: {integrity: sha512-LmXrC+BkDRLak+d5xTMgUYraT3Nj0H/vCbP+7usGvIl9Viqd1UP6AsP0i69pSbn9O0dXK/xCdp4yPw21HqV9Jw==}
     peerDependencies:
@@ -3935,6 +3950,8 @@ snapshots:
 
   '@types/normalize-package-data@2.4.4': {}
 
+  '@types/sortablejs@1.15.8': {}
+
   '@types/svgo@2.6.4':
     dependencies:
       '@types/node': 20.8.9
@@ -4120,7 +4137,7 @@ snapshots:
 
   '@vueuse/shared@10.6.1(vue@3.3.7(typescript@5.2.2))':
     dependencies:
-      vue-demi: 0.14.6(vue@3.3.7(typescript@5.2.2))
+      vue-demi: 0.14.10(vue@3.3.7(typescript@5.2.2))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -6538,6 +6555,10 @@ snapshots:
   vue-demi@0.14.6(vue@3.3.7(typescript@5.2.2)):
     dependencies:
       vue: 3.3.7(typescript@5.2.2)
+
+  vue-draggable-plus@0.5.3(@types/sortablejs@1.15.8):
+    dependencies:
+      '@types/sortablejs': 1.15.8
 
   vue-router@4.0.13(vue@3.3.7(typescript@5.2.2)):
     dependencies:

@@ -59,7 +59,10 @@ export default function useFormCurd<T = any>(option: Option<T>) {
 		newVal => {
 			isChanged.value = !window.$_.isEqual(newVal, originForm)
 		},
-		{ immediate: true, deep: true }
+		{
+			immediate: true,
+			deep: true
+		}
 	)
 
 	const save = async () => {
