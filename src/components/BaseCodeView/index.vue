@@ -14,12 +14,6 @@ const props = withDefaults(defineProps<IProps>(), {
 	codeJson: ''
 })
 
-const visible = ref(false)
-const open = () => {
-	visible.value = true
-}
-defineExpose({ open })
-
 const defaultConfig = {
 	tabSize: 2,
 	basic: true,

@@ -1,4 +1,10 @@
-# 1.0.0 (2024-08-21)
+# 1.0.0 (2024-08-22)
+
+
+### 2024-08-21
+
+* **更新Arco-Design组件:** ✨ feat: 更新Arco-Design组件 ([a8683a5](https://github.com/jianfengtheboy/web-admin-ui/commit/a8683a5))
+* **完善框架:** 🧱 chore: 完善框架 ([d3ad1ae](https://github.com/jianfengtheboy/web-admin-ui/commit/d3ad1ae))
 
 
 ### 2024-08-20
