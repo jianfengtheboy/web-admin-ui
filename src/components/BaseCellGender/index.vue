@@ -1,5 +1,9 @@
 <script lang="ts" setup>
-const props = withDefaults(defineProps<Gender>(), {
+interface IProps {
+	gender: 1 | 2 | 3
+}
+
+const props = withDefaults(defineProps<IProps>(), {
 	gender: 3
 })
 </script>

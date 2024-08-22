@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { useSettingStore } from './store'
+import { useSettingStore, useDictStore } from './store'
 
 defineOptions({ name: 'App' })
 
 const settingStore = useSettingStore()
 settingStore.initTheme()
+
+const dictStore = useDictStore()
+dictStore.getDictData()
 </script>
 
 <template>

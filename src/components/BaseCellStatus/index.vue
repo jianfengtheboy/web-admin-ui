@@ -1,5 +1,9 @@
 <script lang="ts" setup>
-const props = withDefaults(defineProps<Status>(), {
+interface IProps {
+	status: 0 | 1
+}
+
+const props = withDefaults(defineProps<IProps>(), {
 	status: 1
 })
 </script>

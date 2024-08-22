@@ -12,7 +12,7 @@ interface Options<T, U> {
 type PaginationParams = { page: number; size: number }
 type Api<T> = (params: PaginationParams) => Promise<ApiRes<ApiListData<T[]>>> | Promise<ApiRes<T[]>>
 
-export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U>) {
+export default function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U>) {
 	const { formatResult, onSuccess, immediate, rowKey } = options || {}
 	const { pagination, setTotal } = usePagination(() => getTableData())
 	const loading = ref(false)

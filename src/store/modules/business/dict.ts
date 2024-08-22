@@ -8,7 +8,7 @@ const storeSetup = () => {
 		try {
 			const response = await getSystemDictData()
 			if (response && response.code === 200) {
-				dictData.value = response.data.rows || []
+				dictData.value = response.data || {}
 			}
 		} catch (error) {
 			console.log(error)
