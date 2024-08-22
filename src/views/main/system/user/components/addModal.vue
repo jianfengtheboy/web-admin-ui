@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Message, type FormInstance } from '@arco-design/web-vue'
+import { Message, type FormInstance, type ColProps } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { useDept, useRole, useForm } from '@/hooks'
 
@@ -16,6 +16,7 @@ const initData = async () => {
 	await getDeptList()
 }
 
+const col2Props: ColProps = { xs: 24, sm: 24, md: 12, lg: 12, xl: 12, xxl: 12 }
 const userId = ref('')
 const isEdit = computed(() => !!userId.value)
 const title = computed(() => (isEdit.value ? '编辑用户' : '新增用户'))
@@ -41,7 +42,7 @@ const { form, resetForm } = useForm({
 	// 描述
 	description: '',
 	// 状态 0禁用 1启用(正常)
-	status: 1,
+	status: 1 as Status,
 	// 类型 1系统内置(admin是系统内置) 2自定义
 	type: 2 as 1 | 2,
 	// 如果 type===1 这为 true, 主要作用是列表复选框禁用状态
@@ -120,12 +121,13 @@ const save = async () => {
 		width="90%"
 		:mask-closable="false"
 		:modal-style="{ maxWidth: '640px' }"
+		:body-style="{ maxHeight: '70vh' }"
 		@before-ok="save"
 		@close="close"
 	>
 		<a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
 			<a-row>
-				<a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
+				<a-col v-bind="col2Props">
 					<a-form-item label="用户名" field="username">
 						<a-input
 							v-model.trim="form.username"
@@ -133,24 +135,24 @@ const save = async () => {
 							allow-clear
 							:disabled="form.disabled"
 							:max-length="10"
-						></a-input>
+						/>
 					</a-form-item>
 				</a-col>
-				<a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
+				<a-col v-bind="col2Props">
 					<a-form-item label="昵称" field="nickname">
-						<a-input v-model.trim="form.nickname" placeholder="请输入昵称" allow-clear :max-length="10"></a-input>
+						<a-input v-model.trim="form.nickname" placeholder="请输入昵称" allow-clear :max-length="10" />
 					</a-form-item>
 				</a-col>
 			</a-row>
 			<a-row>
-				<a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
+				<a-col v-bind="col2Props">
 					<a-form-item label="手机号码" field="phone">
-						<a-input v-model.trim="form.phone" placeholder="请输入手机号码" allow-clear :max-length="11"></a-input>
+						<a-input v-model.trim="form.phone" placeholder="请输入手机号码" allow-clear :max-length="11" />
 					</a-form-item>
 				</a-col>
-				<a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
+				<a-col v-bind="col2Props">
 					<a-form-item label="邮箱" field="email">
-						<a-input v-model.trim="form.email" placeholder="请输入邮箱" allow-clear :max-length="30"></a-input>
+						<a-input v-model.trim="form.email" placeholder="请输入邮箱" allow-clear :max-length="30" />
 					</a-form-item>
 				</a-col>
 			</a-row>
@@ -206,5 +208,3 @@ const save = async () => {
 		</a-form>
 	</a-modal>
 </template>
-
-<style lang="" scoped></style>

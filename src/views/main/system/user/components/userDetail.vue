@@ -8,10 +8,10 @@ const user = ref<IUserDetailResult | null>()
 const open = async (id: string) => {
 	try {
 		userId.value = id
+		visible.value = true
 		const response = await window.$apis.system.getSystemUserDetail({ id: userId.value })
 		if (response && response.code === 200) {
 			user.value = response.data
-			visible.value = true
 		}
 	} catch (error) {
 		console.log(error)
@@ -32,7 +32,6 @@ defineExpose({ open })
 				<a-tag v-if="user?.status === 0" color="red">禁用</a-tag>
 			</a-descriptions-item>
 			<a-descriptions-item label="性别">
-				<span v-if="user?.gender === 0">未知</span>
 				<span v-if="user?.gender === 1">男</span>
 				<span v-if="user?.gender === 2">女</span>
 			</a-descriptions-item>

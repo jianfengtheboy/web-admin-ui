@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Message, type TreeInstance } from '@arco-design/web-vue'
-import { useDevice, useTable, useDept } from '@/hooks'
+import { useDevice, useTable, useDept, useDict } from '@/hooks'
 import { IUserItem } from '@/model/user'
 import { IDeptItem } from '@/model/dept'
 import { formatParams } from '@/utils/common'
@@ -8,6 +8,7 @@ import AddModal from './components/addModal.vue'
 import UserDetail from './components/userDetail.vue'
 
 const { isMobile } = useDevice()
+const { data: options } = useDict({ code: 'status' })
 
 // 左侧部门树
 const treeRef = ref<TreeInstance>()
@@ -18,10 +19,7 @@ const { deptList, getDeptList } = useDept({
 		})
 	}
 })
-
-onMounted(() => {
-	getDeptList()
-})
+getDeptList()
 
 // 搜索树
 const treeInputValue = ref('')
@@ -99,12 +97,12 @@ const reset = () => {
 // 新增
 const addModalRef = ref<InstanceType<typeof AddModal>>()
 const onAddAction = () => {
-	addModalRef.value && addModalRef.value?.add()
+	addModalRef.value?.add()
 }
 
 // 编辑
 const onEditAction = (item: IUserItem) => {
-	addModalRef.value && addModalRef.value?.edit(item.id)
+	addModalRef.value?.edit(item.id)
 }
 
 // 删除
@@ -123,7 +121,7 @@ const onDeleteAction = () => {
 // 用户详情
 const userDetailRef = ref<InstanceType<typeof UserDetail>>()
 const onOpenDetailAction = (item: IUserItem) => {
-	userDetailRef.value && userDetailRef.value?.open(item.id)
+	userDetailRef.value?.open(item.id)
 }
 </script>
 
@@ -138,7 +136,9 @@ const onOpenDetailAction = (item: IUserItem) => {
 						allow-clear
 						:style="{ marginBottom: '10px' }"
 					>
-						<template #prefix><icon-search /></template>
+						<template #prefix>
+							<icon-search />
+						</template>
 					</a-input>
 					<a-tree
 						ref="treeRef"
@@ -169,12 +169,17 @@ const onOpenDetailAction = (item: IUserItem) => {
 					<a-row class="mb-1">
 						<a-space wrap>
 							<a-input v-model="form.username" placeholder="请输入用户名搜索" allow-clear :style="{ width: '260px' }">
-								<template #prefix><icon-search /></template>
+								<template #prefix>
+									<icon-search />
+								</template>
 							</a-input>
-							<a-select v-model="form.status" placeholder="请选择状态" allow-clear :style="{ width: '160px' }">
-								<a-option :value="1">正常</a-option>
-								<a-option :value="0">禁用</a-option>
-							</a-select>
+							<a-select
+								v-model="form.status"
+								:options="options"
+								placeholder="请选择状态"
+								allow-clear
+								:style="{ width: '160px' }"
+							/>
 							<a-button type="primary" size="small" @click="search">
 								<template #icon><icon-search /></template>
 								<span>查询</span>
@@ -188,7 +193,9 @@ const onOpenDetailAction = (item: IUserItem) => {
 					<a-row class="mb-1.5 mt-0.5">
 						<a-space wrap>
 							<a-button v-hasPerm="['system:user:add']" type="primary" size="small" @click="onAddAction">
-								<template #icon><icon-plus /></template>
+								<template #icon>
+									<icon-plus />
+								</template>
 								<span>新增</span>
 							</a-button>
 							<a-button
@@ -198,7 +205,9 @@ const onOpenDetailAction = (item: IUserItem) => {
 								size="small"
 								@click="onDeleteAction"
 							>
-								<template #icon><icon-delete /></template>
+								<template #icon>
+									<icon-delete />
+								</template>
 								<span>删除</span>
 							</a-button>
 						</a-space>
@@ -226,33 +235,27 @@ const onOpenDetailAction = (item: IUserItem) => {
 									<a-link @click="onOpenDetailAction(record)">{{ record.username }}</a-link>
 								</template>
 							</a-table-column>
-							<a-table-column title="昵称" data-index="nickname" :width="150" align="center" />
+							<a-table-column title="昵称" data-index="nickname" :width="150" align="center">
+								<template #cell="{ record }">
+									<BaseCellAvatar :avatar="record.avatar" :name="record.nickname" />
+								</template>
+							</a-table-column>
 							<a-table-column title="状态" :width="100" align="center">
 								<template #cell="{ record }">
-									<a-tag v-if="record.status === 1" color="green">正常</a-tag>
-									<a-tag v-if="record.status === 0" color="red">禁用</a-tag>
+									<BaseCellStatus :status="record.status" />
 								</template>
 							</a-table-column>
 							<a-table-column title="性别" data-index="gender" :width="80" align="center">
 								<template #cell="{ record }">
-									<span v-if="record.gender === 0">未知</span>
-									<span v-if="record.gender === 1">男</span>
-									<span v-if="record.gender === 2">女</span>
+									<BaseCellGender :gender="record.gender" />
 								</template>
 							</a-table-column>
-							<a-table-column title="头像" data-index="avatar" :width="100" align="center">
-								<template #cell="{ record }">
-									<a-avatar>
-										<img alt="avatar" :src="record.avatar" />
-									</a-avatar>
-								</template>
-							</a-table-column>
-							<a-table-column title="联系方式" data-index="phone" :width="180" align="center" />
+							<a-table-column title="联系方式" data-index="phone" :width="120" align="center" />
 							<a-table-column title="部门" data-index="deptName" :width="180" align="center" />
 							<a-table-column title="类型" :width="100" align="center">
 								<template #cell="{ record }">
-									<a-tag v-if="record.type === 1" color="red">系统内置</a-tag>
-									<a-tag v-if="record.type === 2" color="orange">自定义</a-tag>
+									<a-tag v-if="record.type === 1" color="red" size="small">系统内置</a-tag>
+									<a-tag v-if="record.type === 2" color="orange" size="small">自定义</a-tag>
 								</template>
 							</a-table-column>
 							<a-table-column title="描述" :width="200" data-index="description" align="center" />
@@ -261,7 +264,9 @@ const onOpenDetailAction = (item: IUserItem) => {
 								<template #cell="{ record }">
 									<a-space>
 										<a-button v-hasPerm="['system:user:edit']" type="primary" size="mini" @click="onEditAction(record)">
-											<template #icon><icon-edit /></template>
+											<template #icon>
+												<icon-edit />
+											</template>
 											<span>编辑</span>
 										</a-button>
 										<a-popconfirm type="warning" content="确定删除该用户吗?" @before-ok="onDelete(record)">
@@ -272,7 +277,9 @@ const onOpenDetailAction = (item: IUserItem) => {
 												size="mini"
 												:disabled="record.disabled"
 											>
-												<template #icon><icon-delete /></template>
+												<template #icon>
+													<icon-delete />
+												</template>
 												<span>删除</span>
 											</a-button>
 										</a-popconfirm>

@@ -76,7 +76,13 @@ const onDelete = async (item: IDeptItem) => {
 				<a-input v-model="form.name" placeholder="请输入部门名称搜索" allow-clear :style="{ width: '260px' }">
 					<template #prefix><icon-search /></template>
 				</a-input>
-				<a-select v-model="form.status" :options="options" placeholder="请选择状态" :style="{ width: '160px' }" />
+				<a-select
+					v-model="form.status"
+					:options="options"
+					placeholder="请选择状态"
+					allow-clear
+					:style="{ width: '160px' }"
+				/>
 				<a-button type="primary" size="small" @click="search">
 					<template #icon>
 						<icon-search />
