@@ -1,85 +1,56 @@
 <script lang="ts" setup>
-import { Drawer, Message, type TableInstance } from '@arco-design/web-vue'
+import { Drawer, type TableInstance } from '@arco-design/web-vue'
 import { isExternal } from '@/utils/validate'
 import { transformPathToName } from '@/utils/route'
-import { IMenuItem } from '@/model/menu'
-import { useDevice } from '@/hooks'
 import { formatParams } from '@/utils/common'
+import { IMenuItem } from '@/model/menu'
+import { useDevice, useTable, useDict } from '@/hooks'
 import BaseCodeView from '@/components/BaseCodeView/index.vue'
 import AddModal from './components/addModal.vue'
 
 const { isMobile } = useDevice()
+const { data: options } = useDict({ code: 'status' })
+
 const form = reactive({
 	name: '',
 	status: ''
 })
 
 const tableRef = ref<TableInstance>()
-const loading = ref(false)
-const menuList = ref<IMenuItem[]>([])
 
-// 获取列表数据
-const fetchMenuList = async () => {
-	try {
-		loading.value = true
-		const params = {
-			...formatParams(form)
-		}
-		const response = await window.$apis.system.getSystemMenuList(params)
-		if (response && response.code === 200) {
-			menuList.value = response.data
-		}
-	} catch (error) {
-		console.log(error)
-	} finally {
-		loading.value = false
-	}
-}
-
-onMounted(() => {
-	fetchMenuList()
-})
-
-// 查询
-const search = () => {
-	fetchMenuList()
-}
+const {
+	loading,
+	tableData: menuList,
+	search,
+	handleDelete
+} = useTable(() => window.$apis.system.getSystemMenuList({ ...formatParams(form) }), { immediate: true })
 
 // 重置
 const reset = () => {
 	form.name = ''
 	form.status = ''
-	fetchMenuList()
+	search()
 }
 
 // 新增
 const addModalRef = ref<InstanceType<typeof AddModal>>()
 const onAddAction = () => {
-	addModalRef.value && addModalRef.value?.add()
+	addModalRef.value?.add()
 }
 
 // 编辑
 const onEditAction = (item: IMenuItem) => {
-	addModalRef.value && addModalRef.value?.edit(item.id)
+	addModalRef.value?.edit(item.id)
 }
 
 // 新增下级菜单
 const onAddSubAction = (item: IMenuItem) => {
-	addModalRef.value && addModalRef.value?.add(item)
+	addModalRef.value?.add(item)
 }
 
 // 删除
 const onDeleteAction = async (item: IMenuItem) => {
-	try {
-		const response = await window.$apis.system.deleteSystemMenu({ ids: [item.id] })
-		if (response && response.code === 200) {
-			Message.success(response.message)
-			fetchMenuList()
-		}
-		return true
-	} catch (error) {
-		return false
-	}
+	return handleDelete(() => window.$apis.system.deleteSystemMenu({ ids: [item.id] }), { showModal: false })
 }
 
 // 展开、折叠
@@ -105,18 +76,27 @@ const onViewCodeAction = () => {
 		<div class="main-content">
 			<a-space wrap class="mb-1.5">
 				<a-input v-model="form.name" placeholder="请输入菜单名称搜索" allow-clear :style="{ width: '260px' }">
-					<template #prefix><icon-search /></template>
+					<template #prefix>
+						<icon-search />
+					</template>
 				</a-input>
-				<a-select v-model="form.status" placeholder="请选择状态" :style="{ width: '160px' }">
-					<a-option :value="1">正常</a-option>
-					<a-option :value="0">禁用</a-option>
-				</a-select>
+				<a-select
+					v-model="form.status"
+					:options="options"
+					placeholder="请选择状态"
+					allow-clear
+					:style="{ width: '160px' }"
+				/>
 				<a-button type="primary" size="small" @click="search">
-					<template #icon><icon-search /></template>
+					<template #icon>
+						<icon-search />
+					</template>
 					<span>查询</span>
 				</a-button>
 				<a-button type="outline" size="small" @click="reset">
-					<template #icon><icon-refresh /></template>
+					<template #icon>
+						<icon-refresh />
+					</template>
 					<span>重置</span>
 				</a-button>
 			</a-space>
@@ -137,7 +117,9 @@ const onViewCodeAction = () => {
 				</a-tooltip>
 				<a-tooltip content="查看数据结构">
 					<a-button type="primary" status="warning" size="small" @click="onViewCodeAction">
-						<template #icon><icon-code /></template>
+						<template #icon>
+							<icon-code />
+						</template>
 					</a-button>
 				</a-tooltip>
 			</a-space>
@@ -162,9 +144,9 @@ const onViewCodeAction = () => {
 					</a-table-column>
 					<a-table-column title="类型" :width="80" align="center">
 						<template #cell="{ record }">
-							<a-tag v-if="record.type === 1" color="orangered">目录</a-tag>
-							<a-tag v-if="record.type === 2" color="green">菜单</a-tag>
-							<a-tag v-if="record.type === 3">按钮</a-tag>
+							<a-tag v-if="record.type === 1" size="small" color="orangered">目录</a-tag>
+							<a-tag v-if="record.type === 2" size="small" color="green">菜单</a-tag>
+							<a-tag v-if="record.type === 3" size="small">按钮</a-tag>
 						</template>
 					</a-table-column>
 					<a-table-column title="排序" :width="60" align="center">
@@ -186,33 +168,40 @@ const onViewCodeAction = () => {
 					</a-table-column>
 					<a-table-column title="状态" :width="80" align="center">
 						<template #cell="{ record }">
-							<a-tag v-if="record.status === 1" color="green">启用</a-tag>
-							<a-tag v-else color="red">禁用</a-tag>
+							<a-switch
+								type="round"
+								size="small"
+								:model-value="record.status"
+								:checked-value="1"
+								:unchecked-value="0"
+							/>
 						</template>
 					</a-table-column>
 					<a-table-column title="是否缓存" :width="90" align="center">
 						<template #cell="{ record }">
-							<a-tag v-if="record.keepAlive" color="green">是</a-tag>
-							<a-tag v-else color="red">否</a-tag>
+							<a-tag v-if="record.keepAlive" size="small" color="green">是</a-tag>
+							<a-tag v-else size="small" color="red">否</a-tag>
 						</template>
 					</a-table-column>
 					<a-table-column title="是否隐藏" :width="90" align="center">
 						<template #cell="{ record }">
-							<a-tag v-if="record.hidden" color="green">是</a-tag>
-							<a-tag v-else color="red">否</a-tag>
+							<a-tag v-if="record.hidden" size="small" color="green">是</a-tag>
+							<a-tag v-else size="small" color="red">否</a-tag>
 						</template>
 					</a-table-column>
 					<a-table-column title="是否外链" :width="90" align="center">
 						<template #cell="{ record }">
-							<a-tag v-if="isExternal(record.path)" color="green">是</a-tag>
-							<a-tag v-else color="red">否</a-tag>
+							<a-tag v-if="isExternal(record.path)" size="small" color="green">是</a-tag>
+							<a-tag v-else size="small" color="red">否</a-tag>
 						</template>
 					</a-table-column>
 					<a-table-column title="操作" :width="245" align="left" :fixed="!isMobile ? 'right' : undefined">
 						<template #cell="{ record }">
 							<a-space>
 								<a-button v-hasPerm="['system:menu:edit']" type="primary" size="mini" @click="onEditAction(record)">
-									<template #icon><icon-edit /></template>
+									<template #icon>
+										<icon-edit />
+									</template>
 									<span>编辑</span>
 								</a-button>
 								<a-button
@@ -223,7 +212,9 @@ const onViewCodeAction = () => {
 									size="mini"
 									@click="onAddSubAction(record)"
 								>
-									<template #icon><icon-plus /></template>
+									<template #icon>
+										<icon-plus />
+									</template>
 									<span>新增</span>
 								</a-button>
 								<a-popconfirm
@@ -232,7 +223,9 @@ const onViewCodeAction = () => {
 									@before-ok="onDeleteAction(record)"
 								>
 									<a-button v-hasPerm="['system:menu:delete']" type="primary" status="danger" size="mini">
-										<template #icon><icon-delete /></template>
+										<template #icon>
+											<icon-delete />
+										</template>
 										<span>删除</span>
 									</a-button>
 								</a-popconfirm>
