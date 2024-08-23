@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
-import { useTable, useDevice } from '@/hooks'
+import { useTable, useDevice, useDict } from '@/hooks'
 import { formatParams } from '@/utils/common'
 import { IRoleItem } from '@/model/role'
 import AddModal from './components/addModal.vue'
 import PermiModal from './components/permiModal.vue'
 
 const { isMobile } = useDevice()
+const { data: options } = useDict({ code: 'status' })
 
 const form = reactive({
 	name: '',
@@ -39,12 +40,12 @@ const reset = () => {
 // 新增
 const addModalRef = ref<InstanceType<typeof AddModal>>()
 const onAddAction = () => {
-	addModalRef.value && addModalRef.value?.add()
+	addModalRef.value?.add()
 }
 
 // 编辑
 const onEditAction = (item: IRoleItem) => {
-	addModalRef.value && addModalRef.value?.edit(item.id)
+	addModalRef.value?.edit(item.id)
 }
 
 // 删除
@@ -72,24 +73,35 @@ const onPermAction = (item: IRoleItem) => {
 		<div class="main-content">
 			<a-space wrap class="mb-1.5">
 				<a-input v-model="form.name" placeholder="请输入角色名称搜索" allow-clear :style="{ width: '260px' }">
-					<template #prefix><icon-search /></template>
+					<template #prefix>
+						<icon-search />
+					</template>
 				</a-input>
-				<a-select v-model="form.status" placeholder="请选择状态" allow-clear :style="{ width: '160px' }">
-					<a-option :value="1">正常</a-option>
-					<a-option :value="0">禁用</a-option>
-				</a-select>
+				<a-select
+					v-model="form.status"
+					:options="options"
+					placeholder="请选择状态"
+					allow-clear
+					:style="{ width: '160px' }"
+				/>
 				<a-button type="primary" size="small" @click="search">
-					<template #icon><icon-search /></template>
+					<template #icon>
+						<icon-search />
+					</template>
 					<span>查询</span>
 				</a-button>
 				<a-button type="outline" size="small" @click="reset">
-					<template #icon><icon-refresh /></template>
+					<template #icon>
+						<icon-refresh />
+					</template>
 					<span>重置</span>
 				</a-button>
 			</a-space>
 			<a-space wrap class="mb-1.5">
 				<a-button v-hasPerm="['system:role:add']" type="primary" size="small" @click="onAddAction">
-					<template #icon><icon-plus /></template>
+					<template #icon>
+						<icon-plus />
+					</template>
 					<span>新增</span>
 				</a-button>
 				<a-button
@@ -99,7 +111,9 @@ const onPermAction = (item: IRoleItem) => {
 					size="small"
 					@click="onDeleteAction"
 				>
-					<template #icon><icon-delete /></template>
+					<template #icon>
+						<icon-delete />
+					</template>
 					<span>删除</span>
 				</a-button>
 			</a-space>
@@ -121,15 +135,14 @@ const onPermAction = (item: IRoleItem) => {
 					<a-table-column title="序号" :width="64" align="center">
 						<template #cell="cell">{{ cell.rowIndex + 1 }}</template>
 					</a-table-column>
-					<a-table-column title="角色名称" data-index="name" align="center" />
-					<a-table-column title="角色编码" data-index="code" align="center" />
+					<a-table-column title="角色名称" data-index="name" :width="120" align="center" />
+					<a-table-column title="角色编码" data-index="code" :width="120" align="center" />
 					<a-table-column title="状态" :width="100" align="center">
 						<template #cell="{ record }">
-							<a-tag v-if="record.status == 1" color="green">正常</a-tag>
-							<a-tag v-if="record.status == 0" color="red">禁用</a-tag>
+							<BaseCellStatus :status="record.status" />
 						</template>
 					</a-table-column>
-					<a-table-column title="描述" data-index="description" align="center" />
+					<a-table-column title="描述" data-index="description" :width="240" align="center" />
 					<a-table-column title="创建时间" data-index="createTime" :width="180" align="center" />
 					<a-table-column title="操作" :width="280" align="center" :fixed="!isMobile ? 'right' : undefined">
 						<template #cell="{ record }">
@@ -141,7 +154,9 @@ const onPermAction = (item: IRoleItem) => {
 									:disabled="record.disabled"
 									@click="onEditAction(record)"
 								>
-									<template #icon><icon-edit /></template>
+									<template #icon>
+										<icon-edit />
+									</template>
 									<span>编辑</span>
 								</a-button>
 								<a-button
@@ -152,7 +167,9 @@ const onPermAction = (item: IRoleItem) => {
 									:disabled="record.disabled"
 									@click="onPermAction(record)"
 								>
-									<template #icon><icon-safe /></template>
+									<template #icon>
+										<icon-safe />
+									</template>
 									<template #default>分配权限</template>
 								</a-button>
 								<a-popconfirm type="warning" content="确定删除该角色吗?" @before-ok="onDelete(record)">
@@ -163,7 +180,9 @@ const onPermAction = (item: IRoleItem) => {
 										size="mini"
 										:disabled="record.disabled"
 									>
-										<template #icon><icon-delete /></template>
+										<template #icon>
+											<icon-delete />
+										</template>
 										<span>删除</span>
 									</a-button>
 								</a-popconfirm>

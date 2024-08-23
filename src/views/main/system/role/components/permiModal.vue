@@ -32,11 +32,11 @@ const open = async (data: { code: string; title: string }) => {
 	await getTreeData()
 	try {
 		menuIds.value = []
+		visible.value = true
 		const response = await window.$apis.system.getSystemRoleMenuIds({ role: data.code })
 		if (response && response.code === 200) {
 			menuIds.value = response.data
 		}
-		visible.value = true
 	} catch (error) {
 		console.log(error)
 	}
@@ -65,10 +65,10 @@ const save = async () => {
 	<a-modal v-model:visible="visible" title="分配权限" :fullscreen="isMobile" :mask-closable="true" @ok="save">
 		<a-tree
 			ref="treeRef"
-			size="small"
+			v-model:checked-keys="menuIds"
+			size="mini"
 			checkable
 			:check-strictly="true"
-			v-model:checked-keys="menuIds"
 			:data="treeData"
 			:fieldNames="{ key: 'id' }"
 		/>

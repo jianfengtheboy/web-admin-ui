@@ -41,10 +41,10 @@ const add = () => {
 const edit = async (id: string) => {
 	try {
 		roleId.value = id
+		visible.value = true
 		const response = await window.$apis.system.getSystemRoleDetail({ id })
 		if (response && response.code === 200) {
 			Object.assign(form, response.data)
-			visible.value = true
 		}
 	} catch (error) {
 		console.log(error)
@@ -112,8 +112,8 @@ const save = async () => {
 			</a-form-item>
 			<a-form-item label="状态" field="status">
 				<a-switch
-					type="round"
 					v-model="form.status"
+					type="round"
 					:checked-value="1"
 					:unchecked-value="0"
 					checked-text="正常"

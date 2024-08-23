@@ -1,10 +1,11 @@
-# 1.0.0 (2024-08-22)
+# 1.0.0 (2024-08-23)
 
 
 ### 2024-08-22
 
 * **部门管理:** ✨ feat: 部门管理 ([0d6a314](https://github.com/jianfengtheboy/web-admin-ui/commit/0d6a314))
 * **完善框架:** 🧱 chore: 完善框架 ([8337de4](https://github.com/jianfengtheboy/web-admin-ui/commit/8337de4))
+* **用户管理:** ✨ feat: 用户管理 ([ba25f40](https://github.com/jianfengtheboy/web-admin-ui/commit/ba25f40))
 
 
 ### 2024-08-21
