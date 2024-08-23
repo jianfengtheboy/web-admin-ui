@@ -7,12 +7,12 @@ const emit = defineEmits<{
 	(e: 'save-success'): void
 }>()
 
-const FormRef = ref<FormInstance>()
 const dictId = ref('')
 const isEdit = computed(() => !!dictId.value)
 const title = computed(() => (isEdit.value ? '编辑字典' : '新增字典'))
 const visible = ref(false)
 
+const formRef = ref<FormInstance>()
 const { form, resetForm } = useForm({
 	name: '',
 	code: '',
@@ -37,25 +37,27 @@ const add = () => {
 const edit = async (id: string) => {
 	try {
 		dictId.value = id
+		visible.value = true
 		const response = await window.$apis.system.getSystemDictDetail({ id })
 		if (response && response.code === 200) {
 			Object.assign(form, response.data)
-			visible.value = true
 		}
 	} catch (error) {
 		console.log(error)
 	}
 }
 
+defineExpose({ add, edit })
+
 const close = () => {
-	FormRef.value?.resetFields()
+	formRef.value?.resetFields()
 	resetForm()
 }
 
 const save = async () => {
 	try {
-		const obj = await FormRef.value?.validate()
-		if (obj) return false
+		const valid = await formRef.value?.validate()
+		if (valid) return false
 		const response = await window.$apis.system.saveSystemDict(form)
 		if (response && response.code === 200) {
 			Message.success(response.message)
@@ -68,8 +70,6 @@ const save = async () => {
 		return false
 	}
 }
-
-defineExpose({ add, edit })
 </script>
 
 <template>
@@ -82,7 +82,7 @@ defineExpose({ add, edit })
 		@before-ok="save"
 		@close="close"
 	>
-		<a-form ref="FormRef" :model="form" :rules="rules" size="medium" auto-label-width>
+		<a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
 			<a-form-item label="字典名称" field="name">
 				<a-input v-model.trim="form.name" placeholder="请输入字典名称" allow-clear :max-length="10" />
 			</a-form-item>

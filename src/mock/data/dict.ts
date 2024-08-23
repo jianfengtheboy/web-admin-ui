@@ -12,19 +12,19 @@ export const dictData = [
 			{
 				id: '011',
 				name: '男',
-				value: 1,
+				value: '1',
 				status: 1
 			},
 			{
 				id: '012',
 				name: '女',
-				value: 2,
+				value: '2',
 				status: 1
 			},
 			{
 				id: '013',
 				name: '未知',
-				value: 3,
+				value: '3',
 				status: 1
 			}
 		]
@@ -42,13 +42,13 @@ export const dictData = [
 			{
 				id: '021',
 				name: '正常',
-				value: 1,
+				value: '1',
 				status: 1
 			},
 			{
 				id: '022',
 				name: '禁用',
-				value: 0,
+				value: '0',
 				status: 1
 			}
 		]

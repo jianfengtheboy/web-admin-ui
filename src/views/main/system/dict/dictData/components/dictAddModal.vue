@@ -6,13 +6,13 @@ const emit = defineEmits<{
 	(e: 'save-success'): void
 }>()
 
-const formRef = ref<FormInstance>()
 const dictDataId = ref('')
 const isEdit = computed(() => !!dictDataId.value)
 const title = computed(() => (isEdit.value ? '编辑字典数据' : '新增字典数据'))
 const visible = ref(false)
 const loading = ref(false)
 
+const formRef = ref<FormInstance>()
 const { form, resetForm } = useForm({
 	name: '',
 	value: '',
@@ -36,27 +36,32 @@ const add = () => {
 
 // 编辑
 const edit = async (data: { id: string; code: string }) => {
-	dictDataId.value = data.id
-	visible.value = true
-	loading.value = true
-	const response = await window.$apis.system.getSystemDictDataDetail(data)
-	if (response && response.code === 200) {
-		Object.assign(form, response.data)
+	try {
+		loading.value = true
+		visible.value = true
+		dictDataId.value = data.id
+		const response = await window.$apis.system.getSystemDictDataDetail(data)
+		if (response && response.code === 200) {
+			Object.assign(form, response.data)
+		}
+	} catch (error) {
+		console.log(error)
+	} finally {
 		loading.value = false
 	}
 }
+
+defineExpose({ add, edit })
 
 const close = () => {
 	formRef.value?.resetFields()
 	resetForm()
 }
 
-defineExpose({ add, edit })
-
 const save = async () => {
 	try {
-		const obj = await formRef.value?.validate()
-		if (obj) return false
+		const valid = await formRef.value?.validate()
+		if (valid) return false
 		const response = await window.$apis.system.saveSystemDictData(form)
 		if (response && response.code === 200) {
 			Message.success(response.message)

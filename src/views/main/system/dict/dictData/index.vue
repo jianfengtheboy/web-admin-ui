@@ -26,12 +26,12 @@ const { loading, tableData, pagination, selectedKeys, search, select, selectAll,
 // 新增
 const dictAddModalRef = ref<InstanceType<typeof DictAddModal>>()
 const onAddAction = () => {
-	dictAddModalRef.value && dictAddModalRef.value.add()
+	dictAddModalRef.value?.add()
 }
 
 // 编辑
 const onEditAction = (item: IDictDataItem) => {
-	dictAddModalRef.value && dictAddModalRef.value.edit({ id: item.id, code: dictCode.value })
+	dictAddModalRef.value?.edit({ id: item.id, code: dictCode.value })
 }
 
 // 批量删除
@@ -69,11 +69,15 @@ const onDelete = (item: IDictDataItem) => {
 	>
 		<a-space wrap class="mb-1.5">
 			<a-button type="primary" size="small" @click="onAddAction">
-				<template #icon><icon-plus /></template>
+				<template #icon>
+					<icon-plus />
+				</template>
 				<span>新增</span>
 			</a-button>
 			<a-button type="primary" status="danger" size="small" @click="onDeleteAction">
-				<template #icon><icon-delete /></template>
+				<template #icon>
+					<icon-delete />
+				</template>
 				<span>删除</span>
 			</a-button>
 		</a-space>
@@ -99,20 +103,23 @@ const onDelete = (item: IDictDataItem) => {
 				<a-table-column title="字典值" align="center" data-index="value" />
 				<a-table-column title="状态" :width="100" align="center">
 					<template #cell="{ record }">
-						<a-tag v-if="record.status == 1" color="green">启用</a-tag>
-						<a-tag v-if="record.status == 0" color="red">禁用</a-tag>
+						<BaseCellStatus :status="record.status" />
 					</template>
 				</a-table-column>
 				<a-table-column title="操作" :width="180" align="center">
 					<template #cell="{ record }">
 						<a-space>
 							<a-button type="primary" size="mini" @click="onEditAction(record)">
-								<template #icon><icon-edit /></template>
+								<template #icon>
+									<icon-edit />
+								</template>
 								<span>编辑</span>
 							</a-button>
 							<a-popconfirm type="warning" content="确定删除该字典数据吗?" @before-ok="onDelete(record)">
 								<a-button type="primary" status="danger" size="mini">
-									<template #icon><icon-delete /></template>
+									<template #icon>
+										<icon-delete />
+									</template>
 									<span>删除</span>
 								</a-button>
 							</a-popconfirm>
