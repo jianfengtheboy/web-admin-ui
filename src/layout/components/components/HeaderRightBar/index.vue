@@ -24,6 +24,9 @@ const toUser = () => {
 	router.push('/userProfile')
 }
 
+// 修改密码
+const onUpdatePassword = () => {}
+
 // 退出登录
 const logout = () => {
 	Modal.warning({
@@ -103,6 +106,14 @@ const logout = () => {
 							</span>
 						</template>
 						<span>个人中心</span>
+					</a-doption>
+					<a-doption @click="onUpdatePassword">
+						<template #icon>
+							<span class="doption-icon primary flex items-center justify-center flex-shrink-0 text-white">
+								<icon-unlock />
+							</span>
+						</template>
+						<span>修改密码</span>
 					</a-doption>
 					<a-divider class="header-divider" />
 					<a-doption @click="logout">

@@ -1,9 +1,11 @@
-# 1.0.0 (2024-08-23)
+# 1.0.0 (2024-08-25)
 
 
 ### 2024-08-23
 
+* **菜单管理:** ✨ feat: 菜单管理 ([2e6819b](https://github.com/jianfengtheboy/web-admin-ui/commit/2e6819b))
 * **角色管理:** ✨ feat: 角色管理 ([23a2822](https://github.com/jianfengtheboy/web-admin-ui/commit/23a2822))
+* **字典管理:** ✨ feat: 字典管理 ([01288d9](https://github.com/jianfengtheboy/web-admin-ui/commit/01288d9))
 
 
 ### 2024-08-22
