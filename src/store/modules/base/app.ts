@@ -75,8 +75,8 @@ export const useAppStore = defineStore('app', {
 			if (response.code === 200) {
 				this.userInfo = {
 					id: response.data.id,
-					userName: response.data.userName,
-					nickName: response.data.nickName,
+					userName: response.data.username,
+					nickName: response.data.nickname,
 					avatar: response.data.avatar,
 					gender: response.data.gender
 				}

@@ -1,4 +1,9 @@
-# 1.0.0 (2024-08-25)
+# 1.0.0 (2024-08-26)
+
+
+### 2024-08-25
+
+* **修改密码:** ✨ feat: 修改密码 ([9268eed](https://github.com/jianfengtheboy/web-admin-ui/commit/9268eed))
 
 
 ### 2024-08-23
