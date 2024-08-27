@@ -24,6 +24,7 @@
 		"axios": "^1.6.0",
 		"codemirror": "^6.0.1",
 		"dayjs": "^1.11.10",
+		"echarts": "^5.5.1",
 		"js-base64": "^3.7.6",
 		"js-cookie": "^3.0.5",
 		"lodash": "^4.17.21",
@@ -36,6 +37,7 @@
 		"vue-codemirror6": "^1.2.5",
 		"vue-color-kit": "^1.0.6",
 		"vue-draggable-plus": "^0.5.3",
+		"vue-echarts": "^7.0.3",
 		"vue-router": "^4.0.13",
 		"xe-utils": "^3.5.14"
 	},

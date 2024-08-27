@@ -1,6 +1,7 @@
 // base hooks
 import useBreakpoint from './base/useBreakpoint'
 import useBreakpointIndex from './base/useBreakpointIndex'
+import useChart from './base/useChart'
 import useDevice from './base/useDevice'
 import useForm from './base/useForm'
 import useLoading from './base/useLoading'
@@ -17,6 +18,7 @@ import useRole from './business/useRole'
 export {
 	useBreakpoint,
 	useBreakpointIndex,
+	useChart,
 	useDevice,
 	useForm,
 	useLoading,

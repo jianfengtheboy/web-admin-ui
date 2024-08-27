@@ -1,4 +1,9 @@
-# 1.0.0 (2024-08-26)
+# 1.0.0 (2024-08-27)
+
+
+### 2024-08-26
+
+* **首页:** ✨ feat: 工作台 ([fbdc9b0](https://github.com/jianfengtheboy/web-admin-ui/commit/fbdc9b0))
 
 
 ### 2024-08-25

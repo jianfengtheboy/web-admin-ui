@@ -21,9 +21,7 @@ const initTime = () => {
 
 initTime()
 
-const goodTimeText = () => {
-	console.log('appStore', appStore.userInfo)
-
+const goodTimeText = computed(() => {
 	const hour = Dayjs().hour()
 	const timeText = hour < 9 ? '早上好' : hour <= 11 ? '上午好' : hour <= 13 ? '中午好' : hour < 20 ? '下午好' : '晚上好'
 	const tipsText =
@@ -37,7 +35,7 @@ const goodTimeText = () => {
 			? '愿你的心情如午后阳光般明媚，享受每一刻的舒心与愉快！'
 			: '夜幕降临，星河灿烂，愿你心中宁静，梦境甜美！'
 	return `${timeText}！${appStore.userInfo.nickName}。${tipsText}`
-}
+})
 </script>
 
 <template>
@@ -55,7 +53,7 @@ const goodTimeText = () => {
 						<img :src="appStore.userInfo.avatar" />
 					</a-avatar>
 					<div class="tips my-2">
-						<p class="tips-title mb-2.5 text-base">{{ goodTimeText() }}</p>
+						<p class="tips-title mb-2.5 text-base">{{ goodTimeText }}</p>
 						<p>今日阴转大雨，15℃ - 25℃，出门记得带伞哦。</p>
 					</div>
 				</a-space>
