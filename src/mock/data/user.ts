@@ -7,8 +7,7 @@ export const userData = [
 		username: 'Admin',
 		nickname: '管理员',
 		gender: 1,
-		avatar:
-			'https://img.yxs.shenyecg.com/Image/UDlExvo5IqDTbQyObux0yzcxebpCxZrz/jZcEpQPrkP.jpg?x-oss-process=image/resize,m_fill,limit_0,w_200,h_200',
+		avatar: 'https://foruda.gitee.com/avatar/1676981787376490610/1654622_sun125_1578956962.png!avatar200',
 		email: 'jianfengtheboy@163.com',
 		phone: '13006306683',
 		status: 1,
