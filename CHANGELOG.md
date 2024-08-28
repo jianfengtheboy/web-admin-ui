@@ -1,6 +1,11 @@
 # 1.0.0 (2024-08-28)
 
 
+### 2024-08-28
+
+* **首页图表:** ✨ feat: 首页图表 ([935f981](https://github.com/jianfengtheboy/web-admin-ui/commit/935f981))
+
+
 ### 2024-08-27
 
 * **首页:** ✨ feat: 首页 ([e20f323](https://github.com/jianfengtheboy/web-admin-ui/commit/e20f323))

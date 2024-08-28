@@ -582,5 +582,51 @@ export const menus = [
 		showInTabs: true,
 		alwaysShow: false,
 		affix: false
+	},
+	{
+		id: '02',
+		parentId: '',
+		path: '/about',
+		component: 'Layout',
+		redirect: '/about',
+		type: 1,
+		title: '关于项目',
+		svgIcon: '',
+		icon: '',
+		keepAlive: false,
+		hidden: false,
+		sort: 2,
+		activeMenu: '',
+		breadcrumb: true,
+		children: [
+			{
+				id: '0201',
+				parentId: '02',
+				path: '/about',
+				component: 'about/index',
+				redirect: '',
+				type: 2,
+				title: '关于项目',
+				svgIcon: 'menu-about',
+				icon: '',
+				keepAlive: false,
+				hidden: false,
+				sort: 0,
+				activeMenu: '',
+				breadcrumb: false,
+				status: 1,
+				roles: ['role_admin', 'role_user'],
+				permission: '',
+				showInTabs: true,
+				alwaysShow: false,
+				affix: false
+			}
+		],
+		status: 1,
+		roles: ['role_admin', 'role_user'],
+		permission: '',
+		showInTabs: true,
+		alwaysShow: false,
+		affix: false
 	}
 ]
